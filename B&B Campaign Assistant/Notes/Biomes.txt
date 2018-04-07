@@ -1,0 +1,24 @@
+Arid Desert - Maroon
+Semi-Arid Desert - Tan
+Xeric Shrubland - Brown
+Dry Steppe - Light Brown
+Temperate Steppe - Yellow
+Grass Savanna - Yellow with some Green
+Tree Savanna - Green-Yellow
+Mediterranean Vegetation - Orange
+Subtropical Dry Forest - Mossy Green
+Temperate Broadleaf Forest - Light Green
+Subtropical Rain Forest - Green
+Tropical Rain Forest - Dark Green
+Monsoon Forest - Green with some Blue
+Montane Forest - Green-Blue
+Taiga - Blue with some Green
+Tundra - Light Blue
+Alpine Tundra - Blue
+Ice Sheet or Polar Desert - White
+
+
+
+
+
+Altitude: Represented by greying the color up to maximum grey for highest heights.
