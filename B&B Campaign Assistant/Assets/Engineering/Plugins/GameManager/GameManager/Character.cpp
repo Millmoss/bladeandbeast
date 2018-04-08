@@ -240,6 +240,7 @@ bool Character::buildPerception()
 	return true;
 }
 
+char *Character::getName() { return name; }
 int Character::getStrength() { return strength; }
 int Character::getDexterity() { return dexterity; }
 int Character::getAgility() { return agility; }
@@ -249,6 +250,7 @@ int Character::getWillpower() { return willpower; }
 int Character::getPerception() { return perception; }
 int Character::getCharisma() { return charisma; }
 int Character::getBeauty() { return beauty; }
+char *Character::getAge() { char *r = (char *)malloc(sizeof(char) * 32); sprintf_s(r, 32, "WOAH"); return r; }
 
 int Character::getRestrictMax() { return restrictMax; }
 int Character::getRestrict() { return restrict; }

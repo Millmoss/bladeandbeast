@@ -36,6 +36,7 @@ public:
 	bool buildPerception();
 	
 	//get methods
+	char *getName();
 	int getStrength();					//
 	int getDexterity();					//
 	int getAgility();					//
@@ -45,6 +46,7 @@ public:
 	int getPerception();				//
 	int getCharisma();					//
 	int getBeauty();					//
+	char *getAge();
 
 	int getRestrictMax();
 	int getRestrict();

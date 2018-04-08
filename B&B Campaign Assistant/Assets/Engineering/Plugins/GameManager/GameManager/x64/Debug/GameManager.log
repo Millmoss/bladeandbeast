@@ -1,2 +1,4 @@
-﻿  GameManager.cpp
+﻿  Character.cpp
+c:\users\millmoss\desktop\bladeandbeastcampaignassistant\b&b campaign assistant\assets\engineering\plugins\gamemanager\gamemanager\character.cpp(183): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+     Creating library C:\Users\Millmoss\Desktop\bladeandbeastcampaignassistant\B&B Campaign Assistant\Assets\Engineering\Plugins\GameManager\x64\Debug\GameManager.lib and object C:\Users\Millmoss\Desktop\bladeandbeastcampaignassistant\B&B Campaign Assistant\Assets\Engineering\Plugins\GameManager\x64\Debug\GameManager.exp
   GameManager.vcxproj -> C:\Users\Millmoss\Desktop\bladeandbeastcampaignassistant\B&B Campaign Assistant\Assets\Engineering\Plugins\GameManager\x64\Debug\GameManager.dll
