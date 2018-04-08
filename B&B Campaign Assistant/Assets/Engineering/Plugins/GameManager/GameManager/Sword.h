@@ -9,9 +9,9 @@ class Sword : Weapon				//note, portions of this code are experimental
 {
 public:
 	Sword(char *line);
-	void addForm(char *line);
-	void setDescription(char *line);
-	~Sword();
+	//void addForm(char *line);
+	//void setDescription(char *line);
+	//~Sword();
 protected:
 	//base information
 	float totalLength;				//note, this length is from blade tip to pommel

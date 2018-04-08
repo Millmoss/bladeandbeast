@@ -9,7 +9,7 @@ class Entity
 {
 	public:
 		Entity();							//does literally nothing
-		void SetName(char *n);				//sets the name
+		void setName(char *n);				//sets the name
 		~Entity();							//frees all memory
 	protected:
 		char *name;							//name

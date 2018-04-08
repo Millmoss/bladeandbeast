@@ -1,0 +1,2 @@
+﻿  GameManager.cpp
+LINK : fatal error LNK1168: cannot open C:\Users\Millmoss\Desktop\bladeandbeastcampaignassistant\B&B Campaign Assistant\Assets\Engineering\Plugins\GameManager\x64\Debug\GameManager.dll for writing

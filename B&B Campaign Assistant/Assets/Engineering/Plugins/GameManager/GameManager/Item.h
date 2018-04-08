@@ -8,7 +8,7 @@ class Item
 {
 public:
 	Item();				//      
-	~Item();
+	//~Item();
 protected:
 	char *name;			//name
 	float weight;		//weight

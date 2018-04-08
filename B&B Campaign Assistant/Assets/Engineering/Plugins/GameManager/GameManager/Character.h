@@ -5,7 +5,7 @@
 #ifndef __CHARACTER_H_INCLUDED__
 #define __CHARACTER_H_INCLUDED__
 
-class Character : Entity		//TODO	Implement effects of age, effects of agility/strength on height/weight, skills
+class Character : public Entity		//TODO	Implement effects of age, effects of agility/strength on height/weight, skills
 {
 public:
 	//construction methods

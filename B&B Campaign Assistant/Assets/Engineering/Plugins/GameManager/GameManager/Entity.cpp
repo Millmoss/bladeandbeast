@@ -5,9 +5,9 @@ Entity::Entity()
 
 }
 
-void Entity::SetName(char *n)
+void Entity::setName(char *n)
 {
-	strcpy(name, n);
+	name = n;
 }
 
 Entity::~Entity()

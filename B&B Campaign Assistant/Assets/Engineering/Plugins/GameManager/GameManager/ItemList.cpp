@@ -15,7 +15,7 @@ ItemList::ItemList()
 		}
 		fileReader.close();
 	}*/
-
+	/*
 	char l0[] = "N|Longsword|3|3";
 	Sword longsword(l0);
 	char l1[] = "F|2H  |1   |10 |0     |3  |8   |2  |1  |0    |1    |1      |1     |-4     |0      |A+80 |99";
@@ -28,7 +28,7 @@ ItemList::ItemList()
 	int i;
 	int p;
 	
-	token = strtok(l0, "|");
+	token = strtok_s(l0, "|", );
 	i = 0;
 	p = 0;
 	while (token != NULL)
@@ -45,5 +45,5 @@ ItemList::ItemList()
 	token = strtok(l2, "|");
 
 	p = 2;
-	token = strtok(l3, "|");
+	token = strtok(l3, "|");*/
 }
