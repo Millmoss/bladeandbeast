@@ -1,13 +1,10 @@
-#include <iostream>
-#include <stdlib.h>
-#include "Character.h"
+extern "C"
+{
+	#define DllExport __declspec (dllexport)
 
-#define DllExport __declspec (dllexport)
+	DllExport void createCharacter(char *name);
 
-Character character;
+	DllExport void setStrength(int s);
 
-extern "C" DllExport void createCharacter(char *name);
-
-extern "C" DllExport void setStrength(int s);
-
-extern "C" DllExport int getStrength();
+	DllExport int getStrength();
+}
