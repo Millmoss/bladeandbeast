@@ -1,5 +1,2 @@
-﻿  GameManager.cpp
-c:\users\millmoss\desktop\bladeandbeastcampaignassistant\b&b campaign assistant\assets\engineering\plugins\gamemanager\gamemanager\gamemanager.cpp(129): warning C4172: returning address of local variable or temporary: r
-c:\users\millmoss\desktop\bladeandbeastcampaignassistant\b&b campaign assistant\assets\engineering\plugins\gamemanager\gamemanager\gamemanager.cpp(202): warning C4172: returning address of local variable or temporary: r
-c:\users\millmoss\desktop\bladeandbeastcampaignassistant\b&b campaign assistant\assets\engineering\plugins\gamemanager\gamemanager\gamemanager.cpp(373): warning C4172: returning address of local variable or temporary: r
+﻿     Creating library C:\Users\Millmoss\Desktop\bladeandbeastcampaignassistant\B&B Campaign Assistant\Assets\Engineering\Plugins\GameManager\x64\Debug\GameManager.lib and object C:\Users\Millmoss\Desktop\bladeandbeastcampaignassistant\B&B Campaign Assistant\Assets\Engineering\Plugins\GameManager\x64\Debug\GameManager.exp
   GameManager.vcxproj -> C:\Users\Millmoss\Desktop\bladeandbeastcampaignassistant\B&B Campaign Assistant\Assets\Engineering\Plugins\GameManager\x64\Debug\GameManager.dll
