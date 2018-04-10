@@ -57,7 +57,7 @@ public class AreaPlacer : MonoBehaviour
 	
 	void Update ()
 	{
-
+		
 	}
 }
 

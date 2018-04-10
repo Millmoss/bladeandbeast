@@ -3,6 +3,10 @@ extern "C"
 	//all methods will return -1 or \0 if something goes wrong
 	#define DllExport __declspec (dllexport)
 
+	//dynamically allocated character array
+	Character **characters;
+	int characterCount;
+
 	//initilize a new character
 	DllExport int createCharacter();
 
