@@ -20,10 +20,6 @@ protected:
 	float *reach;			//reach of corresponding form
 	int *coverage;			//a number representing the area that an attack from this weapon covers, directly affects dodge attempts
 
-	//affectory information
-	float durability;		//number representing the amount of "health" the functional portion of the weapon has. higher numbers are better. when this reaches 0 the weapon is unusable
-
-
 	//upgradeable stats
 	int *speed;				//speed of corresponding form
 	int *draw;				//draw speed of corresponding form

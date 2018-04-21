@@ -3,14 +3,33 @@ extern "C"
 	//all methods will return -1 or \0 if something goes wrong
 	#define DllExport __declspec (dllexport)
 
-	//dynamically allocated character array
+	//character data
 	Character **characters;
 	int characterCount;
 
-	//initilize a new character
+	//item data
+	Item **miscellaneousList;			//miscellaneous items
+	int miscellaneousCount;
+	Weapon **weaponList;				//weapons
+	int weaponCount;
+	Item **armorList;					//armor
+	int armorCount;
+
+	//creature data
+	Character **npcList;				//non-player character list
+	int npcCount;
+	//Creature **animalList;
+	//int animalCount;
+	//Creature **monsterList;
+	//int monsterCount;
+
+	//exported single-call initializers
+	DllExport bool createItems();
+
+	//exported multi-call initializers
 	DllExport int createCharacter();
 
-	//exported set methods
+	//exported character set methods
 	DllExport int setName(int index, char *name);
 	DllExport int setStrength(int index, int s);
 	DllExport int setDexterity(int index, int d);
@@ -25,7 +44,7 @@ extern "C"
 	DllExport int setBaseHeight(int index, float h);
 	DllExport int setBaseWeight(int index, float w);
 
-	//exported get methods
+	//exported character get methods
 	DllExport char *getName(int index);
 	DllExport int getStrength(int index);
 	DllExport int getDexterity(int index);
