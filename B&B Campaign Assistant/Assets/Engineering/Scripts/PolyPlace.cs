@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AreaPlacer : MonoBehaviour
+public class PolyPlace : MonoBehaviour
 {
 	public Material terrainmat;
 	public Material blackUnlit;
