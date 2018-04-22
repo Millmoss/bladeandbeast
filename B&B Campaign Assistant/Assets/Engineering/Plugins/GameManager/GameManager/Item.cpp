@@ -4,8 +4,3 @@ Item::Item()
 {
 
 }
-
-Item::~Item()
-{
-
-}

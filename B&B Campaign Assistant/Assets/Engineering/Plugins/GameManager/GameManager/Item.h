@@ -8,14 +8,13 @@ class Item
 {
 public:
 	Item();				//      
-	~Item();
+	//~Item();
 protected:
 	char *name;			//name
 	float weight;		//weight
 	int price;			//price
 	char *description;	//description of the item
 	char *function;		//function of the item
-	float durability;	//number representing the amount of "health" the functional portion of the item has. higher numbers are better. when this reaches 0 the item is unusable
 };
 
 #endif

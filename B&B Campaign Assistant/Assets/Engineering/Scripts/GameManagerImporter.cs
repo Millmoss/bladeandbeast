@@ -71,16 +71,13 @@ public class GameManagerImporter : MonoBehaviour
 	void Start () {
 		createCharacter();
 		characterCount++;
-		createCharacter();
-		characterCount++;
 		setStrength(0, 10);
 		setName(0, "BOBERT");
-		setName(1, "TOBERT");
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		print(getStrength(0));
 		print(Marshal.PtrToStringAnsi(getName(0), 6));
-		print(Marshal.PtrToStringAnsi(getName(1), 6));
 	}
 }

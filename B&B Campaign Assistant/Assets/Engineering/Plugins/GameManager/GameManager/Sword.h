@@ -20,17 +20,23 @@ protected:
 	
 	//hilt information
 	char *crossguardType;
+	float crossguardLength;
+	float crossguardStrength;
 	char *basketType;				//complex, simple, half-basket, full-basket, none
+	float basketStrength;
 	bool nagel;
-	char *ringGuardType;			//two shield, one shield, two empty, one empty, none
+	float nagelStrength;
+	char *ringGuardType;
+	float ringGuardStrength;
 	bool fingerGuard;
+	float fingerGuardStrength;
 	
 	//blade information
-	char *frontShape;				//blade shape in front
-	char *backShape;				//blade shape in back
-	float pommel;					//pommel type
-	float bladeSharp;				//number from 0 to 1 representing blade sharpness. 1 is maximum sharpness, 0 is completely dull
-	float bladePoint;				//number from 0 to 1 representing the piercing capability of the blade. same as sharp
+	char *frontShape;				//formula representing curvature of blade front
+	float frontCrossSection;		//slant of front cross-section, 0 for completely flat, 1 for square edge, 100 would be a slope of 100 being basically completely edgeless
+	char *backShape;				//formula representing curvature of blade back
+	float backCrossSection;			//slant of back cross-section
+	float pommelWeight;
 	
 };
 
