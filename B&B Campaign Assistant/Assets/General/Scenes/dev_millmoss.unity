@@ -218,8 +218,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12518228395470d4fa668af83f703d29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  green: {fileID: 2100000, guid: bb60a403fbdce744994fcf7ceffabdee, type: 2}
-  blackUnlit: {fileID: 2100000, guid: d38303e6256e39045add857b21314120, type: 2}
+  terrainmat: {fileID: 2100000, guid: bb60a403fbdce744994fcf7ceffabdee, type: 2}
+  linemat: {fileID: 2100000, guid: d38303e6256e39045add857b21314120, type: 2}
+  polyscale: 10
+  heightscale: 2
+  sizescale: 1
+  perlinscale: 0.75
+  linewidth: 0.05
+  lineheight: 0.035
 --- !u!1 &1419672095
 GameObject:
   m_ObjectHideFlags: 0
