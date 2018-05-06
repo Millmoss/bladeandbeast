@@ -18,14 +18,14 @@ public class PolyPlace : MonoBehaviour
 	private GameObject polyTerrainMesh;
 	private GameObject polyLineMesh;
 
-	void Start ()	//redo code to deal with heights better maybe? consider Unity line renderer or custom line renderer
+	void Start ()
 	{
 		areaMap = new Vector3[polyscale, polyscale];
 		for (int z = 0; z < polyscale; z++)
 		{
 			for (int x = 0; x < polyscale; x++)
 			{
-				areaMap[z, x] = new Vector3(x * sizescale, Mathf.Ceil(Mathf.PerlinNoise(x * perlinscale / polyscale, z * perlinscale / polyscale) * heightscale * 10) / 10, z * sizescale);
+				areaMap[z, x] = new Vector3(x * sizescale, Mathf.Ceil(Mathf.PerlinNoise(x * perlinscale, z * perlinscale) * heightscale * 10) / 10, z * sizescale);
 			}
 		}
 		polyTerrainMesh = new GameObject("Plane");
@@ -37,7 +37,7 @@ public class PolyPlace : MonoBehaviour
 		polyLineMesh.AddComponent<MeshFilter>();
 		polyLineMesh.AddComponent<MeshRenderer>();
 		polyLineMesh.GetComponent<MeshRenderer>().material = linemat;
-		smartPolyLine();
+		//smartPolyLine();
 		//spawnLine();
 	}
 	
@@ -67,7 +67,8 @@ public class PolyPlace : MonoBehaviour
 				int mza = z + Mathf.RoundToInt(Random.value);
 				int mxb = x + Mathf.RoundToInt(Random.value);
 				int mzb = z + Mathf.RoundToInt(Random.value);
-				terrainVertices[polyscale * polyscale + ((polyscale - 1) * z) + x] = new Vector3(areaMap[x, z].x + .5f, (areaMap[mxa, mza].y + areaMap[mxb, mzb].y) / 2, areaMap[x, z].z + .5f);
+				float y = (areaMap[x, z].y + areaMap[x + 1, z].y + areaMap[x, z + 1].y + areaMap[x + 1, z + 1].y) / 4;
+				terrainVertices[polyscale * polyscale + ((polyscale - 1) * z) + x] = new Vector3(areaMap[x, z].x + .5f * sizescale, y, areaMap[x, z].z + .5f * sizescale);
 			}
 		}
 
@@ -96,6 +97,45 @@ public class PolyPlace : MonoBehaviour
 		polyTerrainMesh.GetComponent<MeshFilter>().mesh.vertices = terrainVertices;
 		polyTerrainMesh.GetComponent<MeshFilter>().mesh.triangles = terrainTriangles;
 		polyTerrainMesh.GetComponent<MeshFilter>().mesh.RecalculateNormals();
+
+		Vector2[] uvArray = new Vector2[terrainVertices.Length];
+
+		for (int z = 0; z < polyscale; z++)
+		{
+			for (int x = 0; x < polyscale; x++)
+			{
+				uvArray[z * polyscale + x] = new Vector2(areaMap[x, z].z / polyscale / 5, areaMap[x, z].x / polyscale / 5);
+			}
+		}
+
+		for (int z = 0; z < polyscale - 1; z++)
+		{
+			for (int x = 0; x < polyscale - 1; x++)
+			{
+				uvArray[polyscale * polyscale + ((polyscale - 1) * z) + x] = new Vector2((areaMap[x, z].z + .5f * sizescale) / polyscale / 5, (areaMap[x, z].x + .5f * sizescale) / polyscale / 5);
+			}
+		}
+
+		polyTerrainMesh.GetComponent<MeshFilter>().mesh.uv = uvArray;
+		
+		Texture2D texture = new Texture2D(polyscale, polyscale, TextureFormat.ARGB32, false);
+
+		Color gr = Color.green;
+		gr = new Color(gr.r, gr.g, gr.b);
+
+		for (int z = 0; z < polyscale; z++)
+		{
+			for (int x = 0; x < polyscale; x++)
+			{
+				texture.SetPixel(x, z, new Color(gr.r * (.4f * areaMap[x, z].y / heightscale) + gr.r / 3, gr.g * (.4f * areaMap[x, z].y / heightscale) + gr.g / 3, gr.b * (.4f * areaMap[x, z].y / heightscale) + gr.b / 3, 0));
+			}
+		}
+
+		// Apply all SetPixel calls
+		texture.Apply();
+
+		// connect texture to material of GameObject this script is attached to
+		terrainmat.mainTexture = texture;
 	}
 
 	private void smartPolyLine()     //goes through each vertex and figures out which lines need to be drawn
