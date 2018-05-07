@@ -6,7 +6,7 @@ public class UnitCamera : MonoBehaviour
 {
 	public Camera playerCamera;
 	public Transform cameraFocus;
-	public float xSensitivity = 1;
+	public float xSensitivity = 1f;
 	public float ySensitivity = -1;
 	public float moveSentivity = 1;
 	private Vector3 playerChange;
@@ -23,7 +23,7 @@ public class UnitCamera : MonoBehaviour
 
 	void Start()
 	{
-		scrollPosition = 1;
+		scrollPosition = 3;
 		transform.position = cameraFocus.position - (cameraFocus.position - new Vector3(cameraFocus.transform.position.x, cameraFocus.transform.position.y + 1f, cameraFocus.transform.position.z - 1f)).normalized * 10 / scrollPosition;
 		cameraFocus.LookAt(Camera.main.transform);
 		playerCamera.transform.Rotate(Vector3.right, 45);
@@ -52,16 +52,22 @@ public class UnitCamera : MonoBehaviour
 				rotateCamera = true;
 				Cursor.lockState = CursorLockMode.Confined;
 			}
-			xLook = xSensitivity * Input.GetAxis("Mouse X");
-			yLook = ySensitivity * Input.GetAxis("Mouse Y");
+			xLook += xSensitivity * Input.GetAxis("Mouse X") * .25f;
+			yLook += ySensitivity * Input.GetAxis("Mouse Y") * .25f;
+			if (xLook > 180f)
+				xLook -= 360f;
+			if (xLook < -180f)
+				xLook += 360f;
+			if (yLook >= 90f)
+				yLook = 89f;
+			if (yLook < -45f)
+				yLook = -45f;
 		}
 		else if (Input.GetMouseButtonUp(1))
 		{
 			Cursor.visible = true;
 			rotateCamera = false;
 			Cursor.lockState = CursorLockMode.None;
-			xLook = 0;
-			yLook = 0;
 		}
 
 		if (Input.GetKey(KeyCode.LeftShift))
@@ -99,48 +105,18 @@ public class UnitCamera : MonoBehaviour
 		else if (scrollPosition > 25)
 			scrollPosition = 25;
 
-		if (Input.GetAxis("Mouse ScrollWheel") != 0)
-		{
-			//transform.position = cameraFocus.position - (cameraFocus.position - transform.position).normalized * (10 / scrollPosition);
-		}
-
-		playerCamera.transform.eulerAngles = new Vector3(playerCamera.transform.eulerAngles.x, playerCamera.transform.eulerAngles.y, 0.0f);
-		cameraFocus.LookAt(Camera.main.transform);
-		cameraFocus.transform.eulerAngles = new Vector3(0.0f, cameraFocus.transform.eulerAngles.y, 0.0f);
-	}
-
-	void FixedUpdate()
-	{
 		if (xMove > 0)
-			cameraFocus.transform.position += cameraFocus.transform.right / moveSpeed;
-		else if(xMove < 0)
-			cameraFocus.transform.position -= cameraFocus.transform.right / moveSpeed;
+			cameraFocus.transform.position -= cameraFocus.transform.right / moveSpeed * Time.deltaTime * 30;
+		else if (xMove < 0)
+			cameraFocus.transform.position += cameraFocus.transform.right / moveSpeed * Time.deltaTime * 30;
 		if (zMove > 0)
-			cameraFocus.transform.position += cameraFocus.transform.forward / moveSpeed;
+			cameraFocus.transform.position -= cameraFocus.transform.forward / moveSpeed * Time.deltaTime * 30;
 		else if (zMove < 0)
-			cameraFocus.transform.position -= cameraFocus.transform.forward / moveSpeed;
+			cameraFocus.transform.position += cameraFocus.transform.forward / moveSpeed * Time.deltaTime * 30;
 
-		//camera movement
-		playerChange = cameraFocus.transform.position - playerChange;
-		//playerChange.y = 0;
-		transform.position += playerChange;
-
-		//camera y rotation //IF ROTATION GETS WEIRD REORDER X AND Y!!!
-		transform.RotateAround(cameraFocus.transform.position, Vector3.up, xLook * Time.deltaTime * rotateSpeed);
-		yRotationDif = transform.rotation.eulerAngles.y - yRotationDif;
-		cameraFocus.transform.Rotate(Vector3.up, yRotationDif);
-		yRotationDif = transform.rotation.eulerAngles.y;
-
-		//camera x rotation //DO NOT REORDER X AND Y!!!
-		float xRotation = playerCamera.transform.rotation.eulerAngles.x;
-		float futureRotation = yLook * Time.deltaTime * rotateSpeed;
-		playerCamera.transform.RotateAround(cameraFocus.position, cameraFocus.right, futureRotation * -1f);
-		if ((xRotation + futureRotation) >= 89 && (xRotation + futureRotation) <= 324)
-		{
-			playerCamera.transform.RotateAround(cameraFocus.position, cameraFocus.right, futureRotation * 1f);
-		}
-
-		//update player position
-		playerChange = cameraFocus.position;
+		transform.eulerAngles = new Vector3(0, xLook, 0);
+		playerCamera.transform.localEulerAngles = new Vector3(yLook, 0);
+		transform.position = cameraFocus.position - playerCamera.transform.forward * 25 / scrollPosition;
+		cameraFocus.transform.eulerAngles = new Vector3(0.0f, xLook, 0.0f);
 	}
 }
