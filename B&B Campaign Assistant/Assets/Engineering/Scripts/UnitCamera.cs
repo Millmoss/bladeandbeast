@@ -99,6 +99,11 @@ public class UnitCamera : MonoBehaviour
 		else if (scrollPosition > 25)
 			scrollPosition = 25;
 
+		if (Input.GetAxis("Mouse ScrollWheel") != 0)
+		{
+			//transform.position = cameraFocus.position - (cameraFocus.position - transform.position).normalized * (10 / scrollPosition);
+		}
+
 		playerCamera.transform.eulerAngles = new Vector3(playerCamera.transform.eulerAngles.x, playerCamera.transform.eulerAngles.y, 0.0f);
 		cameraFocus.LookAt(Camera.main.transform);
 		cameraFocus.transform.eulerAngles = new Vector3(0.0f, cameraFocus.transform.eulerAngles.y, 0.0f);
