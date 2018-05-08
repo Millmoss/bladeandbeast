@@ -543,7 +543,6 @@ Transform:
   m_Children:
   - {fileID: 291075320}
   - {fileID: 1483820171}
-  - {fileID: 1931760403}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -617,7 +616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a186df57a21c964c98790e9eb0a41d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 494777992}
+  unitCamera: {fileID: 494777992}
   cameraFocus: {fileID: 1931760403}
   xSensitivity: 1.4
   ySensitivity: -1
@@ -1036,11 +1035,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1931760402}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 35.13, y: 7.004, z: 21.41}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
-  m_Father: {fileID: 885444335}
-  m_RootOrder: 2
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1931760404
 MeshRenderer:

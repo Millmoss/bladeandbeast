@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UnitCamera : MonoBehaviour
 {
-	public Camera playerCamera;
+	public Camera unitCamera;
 	public Transform cameraFocus;
 	public float xSensitivity = 1f;
 	public float ySensitivity = -1;
@@ -20,13 +20,15 @@ public class UnitCamera : MonoBehaviour
 	private bool rotateCamera = false;
 	private float yRotationDif = 0;
 	private float scrollPosition;
+	private float scrollGoal;
 
 	void Start()
 	{
-		scrollPosition = 3;
+		scrollPosition = 15;
+		scrollGoal = 15;
 		transform.position = cameraFocus.position - (cameraFocus.position - new Vector3(cameraFocus.transform.position.x, cameraFocus.transform.position.y + 1f, cameraFocus.transform.position.z - 1f)).normalized * 10 / scrollPosition;
 		cameraFocus.LookAt(Camera.main.transform);
-		playerCamera.transform.Rotate(Vector3.right, 45);
+		unitCamera.transform.Rotate(Vector3.right, 45);
 		playerChange = cameraFocus.transform.position;
 		rotateSpeed = 20f;
 		//transform.RotateAround(cameraFocus.transform.position, Vector3.up, 180);
@@ -99,11 +101,13 @@ public class UnitCamera : MonoBehaviour
 		xMove = clampedMove.x;
 		zMove = clampedMove.z;
 
-		scrollPosition += Input.GetAxis("Mouse ScrollWheel");
-		if (scrollPosition < 1)
-			scrollPosition = 1;
-		else if (scrollPosition > 25)
-			scrollPosition = 25;
+		scrollGoal -= Input.GetAxis("Mouse ScrollWheel");
+		if (scrollGoal < 1)
+			scrollGoal = 1;
+		else if (scrollGoal > 25)
+			scrollGoal = 25;
+
+		scrollPosition = Mathf.Lerp(scrollPosition, scrollGoal, .4f);
 
 		if (xMove > 0)
 			cameraFocus.transform.position -= cameraFocus.transform.right / moveSpeed * Time.deltaTime * 30;
@@ -114,9 +118,17 @@ public class UnitCamera : MonoBehaviour
 		else if (zMove < 0)
 			cameraFocus.transform.position += cameraFocus.transform.forward / moveSpeed * Time.deltaTime * 30;
 
+		LayerMask groundMask = 1 << 9;
+		Ray ray = new Ray(cameraFocus.transform.position, -cameraFocus.up);
+		RaycastHit hit = new RaycastHit();
+		if (Physics.Raycast(ray, out hit, 1000f, groundMask))
+		{
+			cameraFocus.position = hit.point + new Vector3(0, .3f);
+		}
+
 		transform.eulerAngles = new Vector3(0, xLook, 0);
-		playerCamera.transform.localEulerAngles = new Vector3(yLook, 0);
-		transform.position = cameraFocus.position - playerCamera.transform.forward * 25 / scrollPosition;
+		unitCamera.transform.localEulerAngles = new Vector3(yLook, 0);
+		transform.position = cameraFocus.position - unitCamera.transform.forward * scrollPosition * .6f;
 		cameraFocus.transform.eulerAngles = new Vector3(0.0f, xLook, 0.0f);
 	}
 }
