@@ -5,7 +5,9 @@ using UnityEngine;
 public class InteractToken : MonoBehaviour
 {
 	public Camera unitCamera;
+	public GameObject devDeselect;
 	public GameObject devPointer;
+	public GameObject devCheck;
 	public Material lineMat;
 	private GameObject selectedObject;
 	private ArrayList movementList;
@@ -44,8 +46,19 @@ public class InteractToken : MonoBehaviour
 					if (hit.transform.gameObject.name == "DevDeselect")
 					{
 						selectedObject = null;
+						for (int i = 0; i < movementList.Count; i++)
+							Destroy((GameObject)movementList[i]);
 						movementList.Clear();
 						line.positionCount = 0;
+						devCheck.transform.position = new Vector3(0, -5f);
+					}
+					else if (hit.transform.gameObject.name.Substring(0, 4) == "Move")
+					{
+
+					}
+					else if (hit.transform.gameObject.name == "DevCheck")
+					{
+
 					}
 					else
 						selectedObject = hit.transform.gameObject;
@@ -58,9 +71,11 @@ public class InteractToken : MonoBehaviour
 					LayerMask levelMask = 1 << 9;
 					if (Physics.Raycast(ray, out hit, 1000f, levelMask))
 					{
-						GameObject movementPointer = new GameObject("Move" + line.positionCount);
+						GameObject movementPointer = Instantiate(devPointer);
+						movementPointer.name = "Move" + line.positionCount;
 						movementPointer.transform.position = hit.point + new Vector3(0, 2f);
 						movementList.Add(movementPointer);
+						devCheck.transform.position = hit.point + new Vector3(0, 3f);
 						line.positionCount++;
 						line.SetPosition(line.positionCount - 1, hit.point + new Vector3(0, .1f));
 					}
@@ -70,16 +85,11 @@ public class InteractToken : MonoBehaviour
 
 		if (selectedObject != null)
 		{
-			devPointer.transform.position = selectedObject.transform.position + new Vector3(0, 2f);
+			devDeselect.transform.position = selectedObject.transform.position + new Vector3(0, 2f);
 		}
 		else
 		{
-			devPointer.transform.position = new Vector3(0, -5f);
+			devDeselect.transform.position = new Vector3(0, -5f);
 		}
-	}
-
-	void drawMovementPointer(Vector3 position)
-	{
-
 	}
 }
