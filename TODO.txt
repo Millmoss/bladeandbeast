@@ -1,0 +1,68 @@
+To Do List - Anything on this list is open to being worked on. With all of these, try to code it as fully and completely as you can the first time because of the nature of this project.
+
+
+
+Battle System
+
+
+
+Active Time Battle System: I'll end up doing this for sure, just writing it down for clarity.
+
+Movement without Grid: Movement with no restrictions.
+
+Movement with Hex-Grid: Movement within a hex grid system.
+
+Movement with Square-Grid: Movement within a square grid system.
+
+Turn-Based Battle System: Turn-based battle system. Would use the same rules, but each character gets it own turn to act. This system will need to support turn grouping so that several players can move at once if they go at or around the same time. This system should support manually set turn lengths.
+
+
+
+Network Stuff
+
+
+
+Multiplayer: Basic capability to see and interact with a battleground with LAN for the moment.
+
+
+
+Terrain Generation and Management
+
+
+
+Better Battlefield Terrain Algorithm: Improve the generic battlefield terrain algorithm so that it will be easier to program in different types of terrain.
+
+
+
+User Interface Programming
+
+
+
+Battle Camera Adjustments: Needs to not go into the ground.
+
+Battle Interface: The interface to be used in tandem with the battle system. This is highly dependant upon the battle system so probably don't do this until we have a battle system mostly worked out.
+
+Character Sheet Interface: The interface to be used to view and manage character information.
+
+
+
+Visual Effects Programming
+
+
+
+Area of Effect Visuals: Visuals that can represent the AOE of all manner of attacks. These should be three dimensional AOE visuals.
+
+Environmental Prop Generation: A list of the most necessary prop objects. These objects should be generated through code and modular.
+	Bricks/Brick Wall System - Create bricks of input weathering, cracking, and size. Walls of specified brick counts and layouts as well.
+
+Fog of War/Perspective Effects: A visual darkness or something that completely/partially obfuscates parts of the battlefield that would not be visible from the perspective of a chosen character.
+
+Movement Lines: Lines that represent where the user has told a character to move. Need to be somewhat reactive to the terrain below them so that they do not clip through rough terrain. Need be reactive to objects blocking the path.
+
+Procedural 2D Grass: Low poly grass system.
+
+Procedural 3D Fire: Highly modular code allowing for the creation of fire of any size, shape, color, and polygons in 3 dimensions. i.e., a non-particle-based fire system. It's important that the polygons be scalable and remain connected when possible so that too much fire won't crash a low-end computer.
+
+Rain and Water: Simple rain effects and water pooling after enough rain. This includes the actual water visual effects too.
+
+Simple Shader: Shader to make things look just a little bit better and a little less Unity-y.
