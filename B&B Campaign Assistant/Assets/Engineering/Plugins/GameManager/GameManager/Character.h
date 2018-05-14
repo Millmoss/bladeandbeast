@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include "Entity.h"
+#include "Weapon.h"
 
 #ifndef __CHARACTER_H_INCLUDED__
 #define __CHARACTER_H_INCLUDED__

@@ -27,9 +27,6 @@
     <ClCompile Include="Weapon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sword.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ItemList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -38,9 +35,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sword.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="Item.h">
       <Filter>Source Files</Filter>
     </ClInclude>
