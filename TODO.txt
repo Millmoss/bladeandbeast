@@ -44,6 +44,8 @@ Battle Interface: The interface to be used in tandem with the battle system. Thi
 
 Character Sheet Interface: The interface to be used to view and manage character information.
 
+GM Level Editor: A interface mode allowing the GM to alter terrain and place props and characters.
+
 
 
 Visual Effects Programming
@@ -53,7 +55,9 @@ Visual Effects Programming
 Area of Effect Visuals: Visuals that can represent the AOE of all manner of attacks. These should be three dimensional AOE visuals.
 
 Environmental Prop Generation: A list of the most necessary prop objects. These objects should be generated through code and modular.
-	Bricks/Brick Wall System - Create bricks of input weathering, cracking, and size. Walls of specified brick counts and layouts as well.
+	Bricks/Brick Wall System - Create bricks of input weathering, cracking, and size. Walls of specified brick counts and layouts as well. The polycount of these should be proportional to their size.
+	Rock System - Create rocks of varied shapes and sizes. This is probably the easiest to start with for these.
+	Trees and Leaves System - Create trees of input height, width, leaf type, color, and so on. For now probably just an oak tree. Also the leaves can just be a big lumpy green object on top of the tree trunk. In the future, leaf type should probably be a set of points that represent a 3d plane shape and placed on the tree.
 
 Fog of War/Perspective Effects: A visual darkness or something that completely/partially obfuscates parts of the battlefield that would not be visible from the perspective of a chosen character.
 
