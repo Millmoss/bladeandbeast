@@ -115,14 +115,24 @@ private:
 	char *eyesight;						//
 
 	//passive combat skills
-
+	int awareness;	//awareness of battle environment. Reduced weather penalties, allows for waiting on multiple opponents at higher levels
+	int reaction;	//affects the reaction time of the character in combat
 
 	//active combat skills
+	int move;
+	int dodge;
+	int cut;
+	int crush;
+	int stab;
+	int parry;
+	int feint;		//effectiveness on chosen character goes down after each use
+	int grapple;
 
+	//CHARACTERS CAN CHOOSE WHAT TO LEARN EVERY NIGHT OR MORNING, THIS CAN BE TRAINING COMBAT SKILLS OR NON-COMBAT SKILLS
+	//COMBAT SKILLS AND NON-COMBAT SKILLS INCREASE AT THE SAME RATE WITH TRAINING
+	//COMBAT INCREASES COMBAT SKILLS FASTER THAN TRAINING, BUT IS OF COURSE VERY DANGEROUS
+	//COMBAT EXPERIENCE IS NOT GAINED IF A BATTLE IS EASILY WON, THERE MUST BE A SIGNIFICANT CHANCE OF FAILURE AND A SMALL CHANCE OF DEATH
 
-	//reactive combat skills
-
-	
 	//dev variables
 	std::string character_dot_txt;
 };
