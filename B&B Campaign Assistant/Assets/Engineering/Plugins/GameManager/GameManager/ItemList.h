@@ -1,4 +1,4 @@
-#include "Sword.h"
+#include "Weapon.h"
 #include <unordered_map>
 
 #ifndef __ITEMLIST_H_INCLUDED__

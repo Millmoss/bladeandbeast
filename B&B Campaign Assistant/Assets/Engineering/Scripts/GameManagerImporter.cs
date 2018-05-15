@@ -7,6 +7,10 @@ public class GameManagerImporter : MonoBehaviour
 {
 	//IMPORTS
 
+	//imported temporary dev methods
+	[DllImport("GameManager")] public static extern bool setFileContents(string contents);
+	[DllImport("GameManager")] public static extern System.IntPtr getFileContents();
+
 	//imported character initialization method
 	[DllImport("GameManager")] public static extern void createCharacter();
 
@@ -76,11 +80,14 @@ public class GameManagerImporter : MonoBehaviour
 		setStrength(0, 10);
 		setName(0, "BOBERT");
 		setName(1, "TOBERT");
+
+		//setFileContents("what the fuck is happening");
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		print(Marshal.PtrToStringAnsi(getName(0), 6));
-		print(Marshal.PtrToStringAnsi(getName(1), 6));
+		//print(Marshal.PtrToStringAnsi(getName(0), 6));
+		//print(Marshal.PtrToStringAnsi(getName(1), 6));
+		print(Marshal.PtrToStringAnsi(getFileContents()));
 	}
 }

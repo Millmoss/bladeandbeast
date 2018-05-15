@@ -20,8 +20,12 @@ extern "C"
 	int npcCount;
 	//Creature **animalList;
 	//int animalCount;
-	//Creature **monsterList;
+	//Monster **monsterList;
 	//int monsterCount;
+
+	//exported temporary dev methods
+	DllExport bool setFileContents(char *contents);
+	DllExport char *getFileContents();
 
 	//exported single-call initializers
 	DllExport bool createItems();

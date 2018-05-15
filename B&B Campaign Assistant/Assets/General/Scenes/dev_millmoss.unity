@@ -795,6 +795,7 @@ GameObject:
   - component: {fileID: 944230351}
   - component: {fileID: 944230352}
   - component: {fileID: 944230353}
+  - component: {fileID: 944230354}
   m_Layer: 0
   m_Name: Player Camera
   m_TagString: Untagged
@@ -849,6 +850,17 @@ MonoBehaviour:
   devPointer: {fileID: 2000131151}
   devCheck: {fileID: 1758333912}
   lineMat: {fileID: 2100000, guid: d38303e6256e39045add857b21314120, type: 2}
+--- !u!114 &944230354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 944230350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10c47169b15484945876a0ed593c8125, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &981891537
 GameObject:
   m_ObjectHideFlags: 0
