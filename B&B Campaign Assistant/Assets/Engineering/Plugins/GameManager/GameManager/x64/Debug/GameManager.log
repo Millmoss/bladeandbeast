@@ -1,1 +1,7 @@
-﻿  GameManager.vcxproj -> C:\Users\Millmoss\Desktop\bladeandbeastcampaignassistant\B&B Campaign Assistant\Assets\Engineering\Plugins\GameManager\x64\Debug\GameManager.dll
+﻿  GameManager.cpp
+c:\users\millmoss\desktop\bladeandbeastcampaignassistant\b&b campaign assistant\assets\engineering\plugins\gamemanager\gamemanager\gamemanager.cpp(119): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\millmoss\desktop\bladeandbeastcampaignassistant\b&b campaign assistant\assets\engineering\plugins\gamemanager\gamemanager\gamemanager.cpp(122): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\millmoss\desktop\bladeandbeastcampaignassistant\b&b campaign assistant\assets\engineering\plugins\gamemanager\gamemanager\gamemanager.cpp(304): warning C4172: returning address of local variable or temporary: r
+c:\users\millmoss\desktop\bladeandbeastcampaignassistant\b&b campaign assistant\assets\engineering\plugins\gamemanager\gamemanager\gamemanager.cpp(377): warning C4172: returning address of local variable or temporary: r
+c:\users\millmoss\desktop\bladeandbeastcampaignassistant\b&b campaign assistant\assets\engineering\plugins\gamemanager\gamemanager\gamemanager.cpp(548): warning C4172: returning address of local variable or temporary: r
+  GameManager.vcxproj -> C:\Users\Millmoss\Desktop\bladeandbeastcampaignassistant\B&B Campaign Assistant\Assets\Engineering\Plugins\GameManager\x64\Debug\GameManager.dll

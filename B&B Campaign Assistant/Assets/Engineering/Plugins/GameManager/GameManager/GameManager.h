@@ -3,11 +3,11 @@ extern "C"
 	//all methods will return -1 or \0 if something goes wrong
 	#define DllExport __declspec (dllexport)
 
-	//character data
+	//player character data : data that the players and GM both have to have
 	Character **characters;
 	int characterCount;
 
-	//item data
+	//item data : data that the players and GM both have to have
 	Item **miscellaneousList;			//miscellaneous items
 	int miscellaneousCount;
 	Weapon **weaponList;				//weapons
@@ -15,7 +15,7 @@ extern "C"
 	Item **armorList;					//armor
 	int armorCount;
 
-	//creature data
+	//creature data : data that only the GM must have, only data the GM wants the players to know is sent to the players
 	Character **npcList;				//non-player character list
 	int npcCount;
 	//Creature **animalList;
@@ -24,14 +24,16 @@ extern "C"
 	//int monsterCount;
 
 	//exported temporary dev methods
-	DllExport bool setFileContents(char *contents);
-	DllExport char *getFileContents();
+	//NONE AT THE MOMENT
 
 	//exported single-call initializers
-	DllExport bool createItems();
+	DllExport bool initializeManager();
 
 	//exported multi-call initializers
 	DllExport int createCharacter();
+
+	//exported save methods
+	DllExport bool saveCharacter(int index);
 
 	//exported character set methods
 	DllExport int setName(int index, char *name);
@@ -49,6 +51,7 @@ extern "C"
 	DllExport int setBaseWeight(int index, float w);
 
 	//exported character get methods
+	DllExport int getIndex(char *name);
 	DllExport char *getName(int index);
 	DllExport int getStrength(int index);
 	DllExport int getDexterity(int index);

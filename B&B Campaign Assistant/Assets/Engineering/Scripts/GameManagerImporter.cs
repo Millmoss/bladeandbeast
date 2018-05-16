@@ -8,11 +8,16 @@ public class GameManagerImporter : MonoBehaviour
 	//IMPORTS
 
 	//imported temporary dev methods
-	[DllImport("GameManager")] public static extern bool setFileContents(string contents);
-	[DllImport("GameManager")] public static extern System.IntPtr getFileContents();
+	//None
+
+	//imported single-call initilizers
+	[DllImport("GameManager")] public static extern bool initializeManager();
 
 	//imported character initialization method
-	[DllImport("GameManager")] public static extern void createCharacter();
+	[DllImport("GameManager")] public static extern int createCharacter();
+
+	//exported save methods
+	[DllImport("GameManager")] public static extern bool saveCharacter(int index);
 
 	//imported set methods
 	[DllImport("GameManager")] public static extern int setName(int index, string name);
@@ -30,6 +35,7 @@ public class GameManagerImporter : MonoBehaviour
 	[DllImport("GameManager")] public static extern int setBaseWeight(int index, float w);
 
 	//imported get methods
+	[DllImport("GameManager")] public static extern int getIndex(string name);
 	[DllImport("GameManager")] public static extern System.IntPtr getName(int index);
 	[DllImport("GameManager")] public static extern int getStrength(int index);
 	[DllImport("GameManager")] public static extern int getDexterity(int index);
@@ -70,24 +76,25 @@ public class GameManagerImporter : MonoBehaviour
 	//LOCAL VARIABLES
 
 	int characterCount;
-
-	// Use this for initialization
+	
 	void Start () {
-		createCharacter();
+		initializeManager();
+		/*createCharacter();
 		characterCount++;
 		createCharacter();
 		characterCount++;
 		setStrength(0, 10);
 		setName(0, "BOBERT");
 		setName(1, "TOBERT");
+		saveCharacter(0);
+		saveCharacter(1);*/
 
-		//setFileContents("what the fuck is happening");
+		//print(setFileContents("what the fuck is happening"));
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		//print(Marshal.PtrToStringAnsi(getName(0), 6));
 		//print(Marshal.PtrToStringAnsi(getName(1), 6));
-		print(Marshal.PtrToStringAnsi(getFileContents()));
+		//print(Marshal.PtrToStringAnsi(getFileContents()));
 	}
 }

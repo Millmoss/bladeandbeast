@@ -21,6 +21,34 @@ Character::Character() : Entity()
 	perception = -1;
 	charisma = -1;
 	beauty = -1;
+	years = -1;
+	days = -1;
+	seconds = -1;
+	restrictMax = -1;
+	restrict = 0;
+	overheatMax = -1;
+	overheat = 0;
+	damageBonus = 0;
+	carryMax = -1;
+	carry = 0;
+	liftMax = -1;
+	weaponProficiency = -1;
+	initiativeBase = 0;
+	initiative = 0;
+	defenseBase = 0;
+	defense = 0;
+	healthMax = -1;
+	health = 0;
+	healSpeed = -1;
+	baseWeight = -1;
+	baseHeight = -1;
+	weight = -1;
+	height = -1;
+	resolve = -1;
+	sorceryBonus = -1;
+	eyeglassesBonus = -1;
+	eyesight = (char *)malloc(sizeof(char) * 16);
+	strcpy_s(eyesight, 16, "Unknown");
 }
 
 Character::~Character()
