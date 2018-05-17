@@ -108,10 +108,10 @@ MonoBehaviour:
     y: 30
     width: 1366
     height: 636
-  m_MinSize: {x: 913, y: 321}
-  m_MaxSize: {x: 22008, y: 10021}
+  m_MinSize: {x: 915, y: 321}
+  m_MaxSize: {x: 22010, y: 10021}
   vertical: 0
-  controlID: 74
+  controlID: 11
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -130,8 +130,8 @@ MonoBehaviour:
     y: 0
     width: 202
     height: 636
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -160,7 +160,7 @@ MonoBehaviour:
   m_MinSize: {x: 204, y: 321}
   m_MaxSize: {x: 4004, y: 8021}
   vertical: 1
-  controlID: 75
+  controlID: 12
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -369,7 +369,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 8afbffff00000000
+    m_ExpandedIDs: a0fbffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -424,9 +424,9 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -64.70235, y: 100.762215, z: 47.319756}
+    m_Target: {x: -59.77562, y: 109.651855, z: 48.245537}
     speed: 2
-    m_Value: {x: -64.70235, y: 100.762215, z: 47.319756}
+    m_Value: {x: -59.77562, y: 109.651855, z: 48.245537}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -449,9 +449,9 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: 0.24286702, y: 0.68709815, z: -0.26414138, w: 0.6317761}
+    m_Target: {x: 0.09382816, y: 0.7079855, z: -0.09581158, w: 0.693378}
     speed: 2
-    m_Value: {x: 0.24286702, y: 0.68709815, z: -0.26414138, w: 0.6317761}
+    m_Value: {x: 0.09382816, y: 0.7079855, z: -0.09581158, w: 0.69337803}
   m_Size:
     m_Target: 22
     speed: 2
@@ -572,7 +572,8 @@ MonoBehaviour:
     m_ScenePaths: []
     m_ShowAllHits: 0
     m_SearchArea: 0
-    m_Folders: []
+    m_Folders:
+    - Assets/Engineering/Scripts
   m_ViewMode: 0
   m_StartGridSize: 64
   m_LastFolders: []
@@ -584,7 +585,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000aa270000d62700000c2800001a280000462800005a280000be280000f6280000fc290000fe290000002a0000022a0000042a0000062a0000082a0000
+    m_ExpandedIDs: 000000007c270000a8270000de270000ec270000182800002e28000092280000ca280000ce290000d0290000d2290000d4290000d6290000d8290000da290000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -612,7 +613,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000aa270000d62700000c2800001a280000462800005a280000be280000f6280000fc290000fe290000002a0000022a0000042a0000062a0000082a0000
+    m_ExpandedIDs: 000000007c270000a8270000de270000ec270000182800002e28000092280000ca280000ce290000d0290000d2290000d4290000d6290000d8290000da290000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

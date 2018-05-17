@@ -1,1 +1,2 @@
-Blade&BeastSaves\Characters\BOBERT.txtBlade&BeastSaves\Characters\TOBERT.txt
+This is a file saving error with |BOBERT
+|

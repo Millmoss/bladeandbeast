@@ -79,6 +79,30 @@ public class GameManagerImporter : MonoBehaviour
 	
 	void Start () {
 		initializeManager();
+		/*setStrength(0, 12);
+		setDexterity(0, 11);
+		setAgility(0, 17);
+		setConstitution(0, 15);
+		setIntellect(0, 1);
+		setWillpower(0, 7);
+		setPerception(0, 18);
+		setCharisma(0, 8);
+		setBeauty(0, 9);
+		setBaseHeight(0, 49);
+		setBaseWeight(0, 179);*/
+
+		print(getStrength(0));
+		print(getDexterity(0));
+		print(getAgility(0));
+		print(getConstitution(0));
+		print(getIntellect(0));
+		print(getWillpower(0));
+		print(getPerception(0));
+		print(getCharisma(0));
+		print(getBeauty(0));
+		print(getBaseHeight(0));
+		print(getBaseWeight(0));
+		saveCharacter(0);
 		/*createCharacter();
 		characterCount++;
 		createCharacter();

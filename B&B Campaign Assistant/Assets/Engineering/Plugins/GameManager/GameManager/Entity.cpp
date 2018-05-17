@@ -7,9 +7,8 @@ Entity::Entity()
 
 void Entity::setName(char *n)
 {
-	char *n2 = (char *)malloc(sizeof(char) * 32);
-	strcpy_s(n2, 32, n);
-	name = n2;
+	name = (char *)malloc(64 * sizeof(char));
+	strcpy_s(name, 64, n);
 }
 
 Entity::~Entity()
