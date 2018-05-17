@@ -1,0 +1,1 @@
+Visible AOE on thrown grenades.
