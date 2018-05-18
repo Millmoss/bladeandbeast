@@ -53,5 +53,8 @@
     <ClInclude Include="GameManager.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Armor.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

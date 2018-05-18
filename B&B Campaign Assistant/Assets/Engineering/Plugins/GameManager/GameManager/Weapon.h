@@ -14,21 +14,33 @@ protected:
 	int forms;				//forms
 	char **form;			//name of corresponding form
 	int *hands;				//hands required to use corresponding form
-	int *dice;				//number of damage die of corresponding form
-	int *damage;			//damage die of corresponding form
-	int *type;				//damage types of corresponding form
-	/*
-	type	cut		crush	stab
-	1		0		0		1
-	2		0		1		0
-	3		0		1		1
-	4		1		0		0
-	5		1		0		1
-	6		1		1		0
-	7		1		1		1
-	*/
-	float *reach;			//reach of corresponding form
-	int *coverage;			//a number representing the area that an attack from this weapon covers, directly affects dodge attempts
+
+	bool *cut;				//can this weapon make a cut attack
+	int *cutDice;			//damage die count for a cut attack
+	int *cutDamage;			//damage die type for a cut attack
+	int *cutMod;			//damage modifier for a cut attack
+	float *cutReach;		//the reach of a cut attack
+	float *cutArc;			//the area of the cut's arc, if this is not fully available, the attack will suffer penalties
+	float *cutHeight;		//the height that must be available for the cut, if it is not available, the attack will suffer penalties
+	float *cutTime;			//the time it takes to make a cut attack
+
+	bool *crush;			//can this weapon make a crush attack
+	int *crushDice;			//damage die count for a crush attack
+	int *crushDamage;		//damage die type for a crush attack
+	int *crushMod;			//damage modifier for a crush attack
+	float *crushReach;		//the reach of a crush attack
+	float *crushArc;		//the area of the crush's arc, if this is not fully available, the attack will suffer penalties
+	float *crushHeight;		//the height that must be available for the crush, if it is not available, the attack will suffer penalties
+	float *crushTime;		//the time it takes to make a crush attack
+
+	bool *stab;				//can this weapon make a stab attack
+	int *stabDice;			//damage die count for a stab attack
+	int *stabDamage;		//damage die type for a stab attack
+	int *stabMod;			//damage modifier for a stab attack
+	float *stabReach;		//the reach of a stab attack
+	float *stabArc;			//the area of the stab's arc, if this is not fully available, the attack will suffer penalties
+	float *stabHeight;		//the height that must be available for the stab, if it is not available, the attack will suffer penalties
+	float *stabTime;		//the time it takes to make a stab attack
 
 	//INFO ON COMBAT:
 	/*
@@ -61,6 +73,7 @@ protected:
 	/*A CRUSH ATTACK WILL RESULT IN 0 LEVELS OF BLEEDING
 	//A STAB ATTACK WILL RESULT IN 1 LEVELS OF BLEEDING
 	//A CUT ATTACK WILL RESULT IN 2 LEVELS OF BLEEDING
+	//THE HIGHEST BLEEDING RESULT WILL BE TAKEN FOR MULTI-TYPE ATTACKS
 	//TAKING 6 DAMAGE OR MORE FROM AN ATTACK INFLICTS A LEVEL OF BLEEDING
 	//ALL BLEEDING FROM CRUSH ATTACKS IS INTERNAL
 	//BLEEDING HAS A CHANCE TO STOP ON ITS OWN. THIS CHANCE REDUCES WITH EACH LEVEL OF BLEEDING. AT 5 LEVELS OF BLEEDING, YOU'RE FUCKED WITHOUT TREATMENT

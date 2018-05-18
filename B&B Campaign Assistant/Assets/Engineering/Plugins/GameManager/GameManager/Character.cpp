@@ -35,8 +35,6 @@ Character::Character() : Entity()
 	weaponProficiency = -1;
 	initiativeBase = 0;
 	initiative = 0;
-	defenseBase = 0;
-	defense = 0;
 	healthMax = -1;
 	health = 0;
 	healSpeed = -1;
@@ -179,24 +177,24 @@ bool Character::buildAgility()
 {
 	switch (agility)
 	{
-		case 1: initiativeBase = 4; defenseBase = -4; walkSpeed = 2; combatSpeed = 10; runSpeed = 20; travelSpeed = 3; break;
-		case 2: initiativeBase = 3; defenseBase = -3; walkSpeed = 4; combatSpeed = 20; runSpeed = 30; travelSpeed = 6; break;
-		case 3: initiativeBase = 2; defenseBase = -2; walkSpeed = 6; combatSpeed = 20; runSpeed = 40; travelSpeed = 12; break;
-		case 4: initiativeBase = 2; defenseBase = -2; walkSpeed = 6; combatSpeed = 20; runSpeed = 45; travelSpeed = 12; break;
-		case 5: initiativeBase = 1; defenseBase = -1; walkSpeed = 12; combatSpeed = 30; runSpeed = 45; travelSpeed = 20; break;
-		case 6: initiativeBase = 1; defenseBase = -1; walkSpeed = 12; combatSpeed = 30; runSpeed = 50; travelSpeed = 20; break;
-		case 7: initiativeBase = 1; defenseBase = -1; walkSpeed = 15; combatSpeed = 30; runSpeed = 50; travelSpeed = 24; break;
-		case 8: initiativeBase = 1; defenseBase = -1; walkSpeed = 15; combatSpeed = 30; runSpeed = 50; travelSpeed = 24; break;
-		case 9: initiativeBase = 0; defenseBase = 0; walkSpeed = 15; combatSpeed = 30; runSpeed = 50; travelSpeed = 24; break;
-		case 10: initiativeBase = 0; defenseBase = 0; walkSpeed = 15; combatSpeed = 30; runSpeed = 50; travelSpeed = 24; break;
-		case 11: initiativeBase = 0; defenseBase = 0; walkSpeed = 15; combatSpeed = 30; runSpeed = 50; travelSpeed = 24; break;
-		case 12: initiativeBase = 0; defenseBase = 0; walkSpeed = 15; combatSpeed = 30; runSpeed = 50; travelSpeed = 24; break;
-		case 13: initiativeBase = -1; defenseBase = 1; walkSpeed = 15; combatSpeed = 30; runSpeed = 55; travelSpeed = 24; break;
-		case 14: initiativeBase = -1; defenseBase = 2; walkSpeed = 16; combatSpeed = 30; runSpeed = 55; travelSpeed = 28; break;
-		case 15: initiativeBase = -1; defenseBase = 3; walkSpeed = 18; combatSpeed = 35; runSpeed = 60; travelSpeed = 32; break;
-		case 16: initiativeBase = -2; defenseBase = 4; walkSpeed = 20; combatSpeed = 40; runSpeed = 70; travelSpeed = 36; break;
-		case 17: initiativeBase = -2; defenseBase = 6; walkSpeed = 21; combatSpeed = 45; runSpeed = 80; travelSpeed = 38; break;
-		case 18: initiativeBase = -3; defenseBase = 7; walkSpeed = 24; combatSpeed = 50; runSpeed = 90; travelSpeed = 40; break;
+		/*case 1: initiativeBase = 4; dodgeBase = -4; walkSpeed = 2; combatSpeed = 10; runSpeed = 20; travelSpeed = 3; break;
+		case 2: initiativeBase = 3; dodgeBase = -3; walkSpeed = 4; combatSpeed = 20; runSpeed = 30; travelSpeed = 6; break;
+		case 3: initiativeBase = 2; dodgeBase = -2; walkSpeed = 6; combatSpeed = 20; runSpeed = 40; travelSpeed = 12; break;
+		case 4: initiativeBase = 2; dodgeBase = -2; walkSpeed = 6; combatSpeed = 20; runSpeed = 45; travelSpeed = 12; break;
+		case 5: initiativeBase = 1; dodgeBase = -1; walkSpeed = 12; combatSpeed = 30; runSpeed = 45; travelSpeed = 20; break;
+		case 6: initiativeBase = 1; dodgeBase = -1; walkSpeed = 12; combatSpeed = 30; runSpeed = 50; travelSpeed = 20; break;
+		case 7: initiativeBase = 1; dodgeBase = -1; walkSpeed = 15; combatSpeed = 30; runSpeed = 50; travelSpeed = 24; break;
+		case 8: initiativeBase = 1; dodgeBase = -1; walkSpeed = 15; combatSpeed = 30; runSpeed = 50; travelSpeed = 24; break;
+		case 9: initiativeBase = 0; dodgeBase = 0; walkSpeed = 15; combatSpeed = 30; runSpeed = 50; travelSpeed = 24; break;
+		case 10: initiativeBase = 0; dodgeBase = 0; walkSpeed = 15; combatSpeed = 30; runSpeed = 50; travelSpeed = 24; break;
+		case 11: initiativeBase = 0; dodgeBase = 0; walkSpeed = 15; combatSpeed = 30; runSpeed = 50; travelSpeed = 24; break;
+		case 12: initiativeBase = 0; dodgeBase = 0; walkSpeed = 15; combatSpeed = 30; runSpeed = 50; travelSpeed = 24; break;
+		case 13: initiativeBase = -1; dodgeBase = 1; walkSpeed = 15; combatSpeed = 30; runSpeed = 55; travelSpeed = 24; break;
+		case 14: initiativeBase = -1; dodgeBase = 2; walkSpeed = 16; combatSpeed = 30; runSpeed = 55; travelSpeed = 28; break;
+		case 15: initiativeBase = -1; dodgeBase = 3; walkSpeed = 18; combatSpeed = 35; runSpeed = 60; travelSpeed = 32; break;
+		case 16: initiativeBase = -2; dodgeBase = 4; walkSpeed = 20; combatSpeed = 40; runSpeed = 70; travelSpeed = 36; break;
+		case 17: initiativeBase = -2; dodgeBase = 6; walkSpeed = 21; combatSpeed = 45; runSpeed = 80; travelSpeed = 38; break;
+		case 18: initiativeBase = -3; dodgeBase = 7; walkSpeed = 24; combatSpeed = 50; runSpeed = 90; travelSpeed = 40; break;*/
 		default: return false;
 	}
 	initiative = initiativeBase;
@@ -291,8 +289,8 @@ int Character::getLiftMax() { return liftMax; }
 int Character::getWeaponProficiency() { return weaponProficiency; }
 int Character::getInitiativeBase() { return initiativeBase; }
 int Character::getInitiative() { return initiative; }
-int Character::getDefenseBase() { return defenseBase; }
-int Character::getDefense() { return defense; }
+int Character::getDodgeBase() {	return dodgeBase; }
+int Character::getDodge() { return dodge; }
 int Character::getHealthMax() { return healthMax; }
 float Character::getHealth() { return health; }
 float Character::getHealSpeed() { return healSpeed; }

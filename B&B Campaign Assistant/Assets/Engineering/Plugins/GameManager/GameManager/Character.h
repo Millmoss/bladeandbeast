@@ -60,8 +60,8 @@ public:
 	int getWeaponProficiency();
 	int getInitiativeBase();
 	int getInitiative();
-	int getDefenseBase();
-	int getDefense();
+	int getDodgeBase();
+	int getDodge();
 	int getHealthMax();
 	float getHealth();
 	float getHealSpeed();
@@ -88,7 +88,7 @@ private:
 	int days;							//number of earth days since earth birthdate
 	int seconds;						//number of earth seconds since earth 24-hour clock time of birth
 	
-	//dependant stats
+	//general dependant stats
 	int restrictMax;					//
 	int restrict;						//
 	int overheatMax;					//
@@ -100,9 +100,8 @@ private:
 	int weaponProficiency;				//the number of points a character gets to put toward broad weapon skill modifiers
 	int initiativeBase;					//base initiative
 	int initiative;						//total initiative
-	int defenseBase;					//base defense
-	int defense;						//total defense
 	int healthMax;						//max health
+	int dodgeBase;						//the base dodge capability of the character
 	float health;						//health
 	float healSpeed;					//speed of healing
 	float baseWeight;					//weight as set by player and affected by strength
@@ -114,16 +113,45 @@ private:
 	int eyeglassesBonus;				//
 	char *eyesight;						//
 
+	//defense stats
+	//these stats all represent the base defense a person's body provides against attacks
+	//the defense number is between 0 and 20, being 0% to 100% defense
+	int headDefenseBase;
+	int neckDefenseBase;
+	int chestDefenseBase;
+	int stomachDefenseBase;
+	int backDefenseBase;
+	int shoulderRightDefenseBase;
+	int shoulderLeftDefenseBase;
+	int upperarmRightDefenseBase;
+	int upperarmLeftDefenseBase;
+	int forearmRightDefenseBase;
+	int forearmLeftDefenseBase;
+	int handRightDefenseBase;
+	int handLeftDefenseBase;
+	int crotchDefenseBase;
+	int buttDefenseBase;
+	int thighRightDefenseBase;
+	int thighLeftDefenseBase;
+	int shinRightDefenseBase;
+	int shinLeftDefenseBase;
+	int calfRightDefenseBase;
+	int calfLeftDefenseBase;
+	int footRightDefenseBase;
+	int footLeftDefenseBase;
+	int heelRightDefenseBase;
+	int heelLeftDefenseBase;
+
 	//passive combat skills
 	int awareness;	//awareness of battle environment. Reduced weather penalties, allows for waiting on multiple opponents at higher levels
 	int reaction;	//affects the reaction time of the character in combat
 
 	//active combat skills
 	int move;
-	int dodge;
-	int cut;
-	int crush;
-	int stab;
+	int dodge;	//can do all actions while dodging, but the actions will be far less effective and this slightly reduces dodge chance
+	int cut;	//when making an attack, you click attack, then select the body part(s) to aim for.
+	int crush;	//the more body parts you select to aim for, the more higher a hit rate your character will have.
+	int stab;	//however, high hit rate is useless if coverage is too high.
 	int parry;
 	int feint;		//effectiveness on chosen character goes down after each use
 	int grapple;
