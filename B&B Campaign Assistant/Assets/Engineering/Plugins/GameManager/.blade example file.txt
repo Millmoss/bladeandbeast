@@ -1,0 +1,20 @@
+<Armor>			//carrots denote data type, if data type does not exist, file is ignored
+[Helmet]		//first element is always the name of the object, character, or whatever this data type is
+[Head]			//the second element, in this case the corresponding area the helmet covers
+(Cut, Crush, Stab)	//lines beginning with parentheses are completely ignored. Are for readability
+[ 15,     5,   10]	//you can put as many spaces in front of a number as you want to space evenly
+[Neck, Back of]		//file parser only cares about commas if it expects them
+(     Cut,   Crush,   Stab)
+[  001011,     100, 100000]	//look you can make the numbers a lot longer barring an int overflow lol
+[I am doggie weeeee]
+[random, data, woop woop]	//I mean it'll still parse and input this data I guess lol prob don't do this though
+
+
+
+
+
+
+
+
+(Note: I just wanted a file format called .blade I'm aware this is just a glorified .txt but it's fun lol)
+(Note: I keep using lol in this file because it makes me lol when lol is used in places where it doesn't belong lol)

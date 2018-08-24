@@ -1,7 +1,9 @@
 #include <iostream>
 #include <stdlib.h>
+#include <stack>
 #include "Entity.h"
 #include "Weapon.h"
+#include "Armor.h"
 
 #ifndef __CHARACTER_H_INCLUDED__
 #define __CHARACTER_H_INCLUDED__
@@ -116,31 +118,11 @@ private:
 	//defense stats
 	//these stats all represent the base defense a person's body provides against attacks
 	//the defense number is between 0 and 20, being 0% to 100% defense
-	int headDefenseBase;
-	int neckDefenseBase;
-	int chestDefenseBase;
-	int stomachDefenseBase;
-	int backDefenseBase;
-	int shoulderRightDefenseBase;
-	int shoulderLeftDefenseBase;
-	int upperarmRightDefenseBase;
-	int upperarmLeftDefenseBase;
-	int forearmRightDefenseBase;
-	int forearmLeftDefenseBase;
-	int handRightDefenseBase;
-	int handLeftDefenseBase;
-	int crotchDefenseBase;
-	int buttDefenseBase;
-	int thighRightDefenseBase;
-	int thighLeftDefenseBase;
-	int shinRightDefenseBase;
-	int shinLeftDefenseBase;
-	int calfRightDefenseBase;
-	int calfLeftDefenseBase;
-	int footRightDefenseBase;
-	int footLeftDefenseBase;
-	int heelRightDefenseBase;
-	int heelLeftDefenseBase;
+	//defense contains keys listing every body part's defense against a certain damage type
+	//these damage types can technically be anything, but in the case of this ruleset:
+	//0 is cut damage, 1 is crush damage, and 2 is stab damage
+	//other damage types can be added, but input files will have to be edited to account for that damage type
+	std::unordered_map<std::string, int *> defense;
 
 	//passive basic combat skills
 	int awareness;	//awareness of battle environment. Reduced weather penalties, allows for waiting on multiple opponents at higher levels
@@ -151,7 +133,7 @@ private:
 	int dodge;		//can do all actions while dodging, but the actions will be far less effective and this slightly reduces dodge chance
 	int cut;		//when making an attack, you click attack, then select the body part(s) to aim for.
 	int crush;		//the more body parts you select to aim for, the higher a hit rate your character will have.
-	int stab;		//however, high hit rate is useless if coverage is too high.
+	int stab;		//however, high hit rate is useless if the defense of where the weapon hits is too high
 	int parry;
 	int feint;		//effectiveness on chosen character goes down after each use
 	int grapple;
@@ -159,25 +141,42 @@ private:
 
 	//passive basic adventure skills
 	//training allows for an increase in the effective stat
-	//stats train very slowly
-	//more time is required to train the stat at each training level
 	//training also goes down over time if the stat is not being trained
 	//training is gained naturally from daily activities
 	//character's are allowed to start with training in stats of their choice
+	//stats train at a rate 2^n, n being an integer representing the stat bonus
+	//the points per month of training are given the square root of the base stat
+	//a month of training counts as 30 training hours in a month, as long as this minimum is being met the training points will increase
+	//training hours are not always an hour, a high intensity work out for 30 minutes yields a training hour, and so does four hours of travel
+	//the month of training hour count goes up by the rate as that increases (30, 32, 36, 44, 60, 92)
+	//if a character is incapable of meeting the old training hour requirement, their training will go down by the amount they missed it by
+	//the training is recalculated at the end of every day
+	//if (hours / (30 + 2^0 ~ 2^(n-1)) - 1 < 0)
+	//	training += (30 + 2^0 ~ 2^n - 1) - 1
 	float trainingStrength;				//trained through combat, travel, lifting, etc
+	std::stack<float> hoursStrength;	//hours of training over the past month
 	float trainingDexterity;			//trained through combat, crafting, cooking, etc
+	std::stack<float> hoursDexterity;
 	float trainingAgility;				//trained through combat, sprinting, etc
+	std::stack<float> hoursAgility;
 	float trainingConstitution;			//trained through travel, eating, etc
+	std::stack<float> hoursConstitution;
 	float trainingIntellect;			//trained through reading, travel, etc
+	std::stack<float> hoursIntellect;
 	float trainingWillpower;			//trained through ???
+	std::stack<float> hoursWillpower;
 	float trainingPerception;			//trained through ???
+	std::stack<float> hoursPerception;
 	float trainingCharisma;				//trained through social interaction, reading, etc
-	float trainingBeauty;				//can you train this??? kinda maybe?
+	std::stack<float> hoursCharisma;
+	float trainingBeauty;				//trained through looking in a mirror and worrying about your looks
+	std::stack<float> hoursBeauty;
 
 	//IMPLEMENT SKILL TREES FOR COMBAT AND ADVENTURE SKILLS
 
-	//CHARACTERS CAN CHOOSE WHAT TO LEARN EVERY NIGHT OR MORNING, THIS CAN BE TRAINING COMBAT SKILLS OR NON-COMBAT SKILLS
-	//COMBAT SKILLS AND NON-COMBAT SKILLS INCREASE AT THE SAME RATE WITH TRAINING
+	//CHARACTERS CAN CHOOSE WHAT TO LEARN EVERY NIGHT OR MORNING, THIS IS FOR TRAINING SKILLS
+	//SKILLS INCREASE AT THE SAME RATE WITH TRAINING
+	//SKILLS INCREASE FASTER WITH ACTUAL USE OF THEM, BUT THIS CAN OFTEN COME AT GREAT RISK
 	//COMBAT INCREASES COMBAT SKILLS FASTER THAN TRAINING, BUT IS OF COURSE VERY DANGEROUS
 	//COMBAT EXPERIENCE IS NOT GAINED IF A BATTLE IS EASILY WON, THERE MUST BE A SIGNIFICANT CHANCE OF FAILURE AND A SMALL CHANCE OF DEATH
 
