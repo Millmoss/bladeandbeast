@@ -9,8 +9,11 @@
 class Armor : Item
 {
 public:
-	Armor(char *n, std::unordered_map<std::string, int *> bp);
+	Armor();
+	Armor(char *n, float w, float p, float dur, int dtc, std::unordered_map<std::string, int *> def);
 	int getDefense(char *location, int hit, int *damageTypes);	//gets the damage reduction on the attack
+	void writeTo(FILE *f);
+	~Armor();
 protected:
 	std::unordered_map<std::string, int *> defense;
 	int damageTypeCount;

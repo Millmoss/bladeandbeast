@@ -1,7 +1,49 @@
-﻿  GameManager.cpp
-c:\users\millmoss\desktop\bladeandbeastcampaignassistant\b&b campaign assistant\assets\engineering\plugins\gamemanager\gamemanager\gamemanager.cpp(120): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\millmoss\desktop\bladeandbeastcampaignassistant\b&b campaign assistant\assets\engineering\plugins\gamemanager\gamemanager\gamemanager.cpp(124): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\millmoss\desktop\bladeandbeastcampaignassistant\b&b campaign assistant\assets\engineering\plugins\gamemanager\gamemanager\gamemanager.cpp(318): warning C4172: returning address of local variable or temporary: r
-c:\users\millmoss\desktop\bladeandbeastcampaignassistant\b&b campaign assistant\assets\engineering\plugins\gamemanager\gamemanager\gamemanager.cpp(391): warning C4172: returning address of local variable or temporary: r
-c:\users\millmoss\desktop\bladeandbeastcampaignassistant\b&b campaign assistant\assets\engineering\plugins\gamemanager\gamemanager\gamemanager.cpp(562): warning C4172: returning address of local variable or temporary: r
-  GameManager.vcxproj -> C:\Users\Millmoss\Desktop\bladeandbeastcampaignassistant\B&B Campaign Assistant\Assets\Engineering\Plugins\GameManager\x64\Debug\GameManager.dll
+﻿  DataManager.cpp
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\utility(320): warning C4200: nonstandard extension used: zero-sized array in struct/union
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\utility(320): note: This member will be ignored by a defaulted constructor or copy/move assignment operator
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\vector(1849): note: see reference to class template instantiation 'std::pair<const _Kty,_Ty>' being compiled
+          with
+          [
+              _Kty=std::string,
+              _Ty=std::string []
+          ]
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\vector(1848): note: while compiling class template member function 'void std::vector<std::_List_unchecked_iterator<std::_List_val<std::_List_simple_types<_Ty>>>,std::allocator<std::_List_unchecked_iterator<std::_List_val<std::_List_simple_types<_Ty>>>>>::_Destroy(std::_List_unchecked_iterator<std::_List_val<std::_List_simple_types<_Ty>>> *,std::_List_unchecked_iterator<std::_List_val<std::_List_simple_types<_Ty>>> *)'
+          with
+          [
+              _Ty=std::pair<const std::string,std::basic_string<char,std::char_traits<char>,std::allocator<char>> []>
+          ]
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\vector(1915): note: see reference to function template instantiation 'void std::vector<std::_List_unchecked_iterator<std::_List_val<std::_List_simple_types<_Ty>>>,std::allocator<std::_List_unchecked_iterator<std::_List_val<std::_List_simple_types<_Ty>>>>>::_Destroy(std::_List_unchecked_iterator<std::_List_val<std::_List_simple_types<_Ty>>> *,std::_List_unchecked_iterator<std::_List_val<std::_List_simple_types<_Ty>>> *)' being compiled
+          with
+          [
+              _Ty=std::pair<const std::string,std::basic_string<char,std::char_traits<char>,std::allocator<char>> []>
+          ]
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\xhash(1175): note: see reference to class template instantiation 'std::vector<std::_List_unchecked_iterator<std::_List_val<std::_List_simple_types<_Ty>>>,std::allocator<std::_List_unchecked_iterator<std::_List_val<std::_List_simple_types<_Ty>>>>>' being compiled
+          with
+          [
+              _Ty=std::pair<const std::string,std::basic_string<char,std::char_traits<char>,std::allocator<char>> []>
+          ]
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\unordered_map(97): note: see reference to class template instantiation 'std::_Hash<std::_Umap_traits<_Kty,_Ty,std::_Uhash_compare<_Kty,_Hasher,_Keyeq>,_Alloc,false>>' being compiled
+          with
+          [
+              _Kty=std::string,
+              _Ty=std::string [],
+              _Hasher=std::hash<std::string>,
+              _Keyeq=std::equal_to<std::string>,
+              _Alloc=std::allocator<std::pair<const std::string,std::basic_string<char,std::char_traits<char>,std::allocator<char>> []>>
+          ]
+  c:\users\administrator\desktop\bladeandbeast\b&b campaign assistant\assets\engineering\plugins\gamemanager\gamemanager\datamanager.h(17): note: see reference to class template instantiation 'std::unordered_map<std::string,std::string [],std::hash<_Kty>,std::equal_to<_Kty>,std::allocator<std::pair<const _Kty,_Ty>>>' being compiled
+          with
+          [
+              _Kty=std::string,
+              _Ty=std::string []
+          ]
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\filesystem(2392): note: see reference to class template instantiation 'std::chrono::time_point<std::filesystem::_File_time_clock,std::filesystem::_File_time_clock::duration>' being compiled
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\type_traits(616): note: see reference to class template instantiation 'std::basic_string_view<wchar_t,std::char_traits<wchar_t>>' being compiled
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\xstring(2124): note: see reference to class template instantiation 'std::is_convertible<const _StringViewIsh &,std::basic_string_view<wchar_t,std::char_traits<wchar_t>>>' being compiled
+          with
+          [
+              _StringViewIsh=const wchar_t *
+          ]
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\xstring(2122): note: see reference to variable template 'const bool conjunction_v<std::is_convertible<wchar_t const * const &,std::basic_string_view<wchar_t,std::char_traits<wchar_t> > >,std::negation<std::is_convertible<wchar_t const * const &,wchar_t const *> > >' being compiled
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\xstring(2281): note: see reference to alias template instantiation '_Is_string_view_ish<const wchar_t*>' being compiled
+  GameManager.vcxproj -> C:\Users\Administrator\Desktop\bladeandbeast\B&B Campaign Assistant\Assets\Engineering\Plugins\GameManager\x64\Debug\GameManager.dll

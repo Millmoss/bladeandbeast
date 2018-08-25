@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "B&B Campaign Assistant", "B&B Campaign Assistant.csproj", "{EF4C79ED-50D7-6AE6-AA30-7D78C238A0A8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{AE70B4A0-FB1A-46AB-8982-CC5C2901D6EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +9,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EF4C79ED-50D7-6AE6-AA30-7D78C238A0A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EF4C79ED-50D7-6AE6-AA30-7D78C238A0A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EF4C79ED-50D7-6AE6-AA30-7D78C238A0A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EF4C79ED-50D7-6AE6-AA30-7D78C238A0A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE70B4A0-FB1A-46AB-8982-CC5C2901D6EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE70B4A0-FB1A-46AB-8982-CC5C2901D6EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE70B4A0-FB1A-46AB-8982-CC5C2901D6EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE70B4A0-FB1A-46AB-8982-CC5C2901D6EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

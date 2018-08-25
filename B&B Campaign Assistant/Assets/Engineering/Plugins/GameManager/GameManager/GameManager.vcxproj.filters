@@ -36,7 +36,7 @@
     <ClCompile Include="Armor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DataParser.cpp">
+    <ClCompile Include="DataManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -62,8 +62,8 @@
     <ClInclude Include="Armor.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="DataParser.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="DataManager.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

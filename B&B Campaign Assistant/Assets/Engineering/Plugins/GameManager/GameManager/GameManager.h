@@ -75,8 +75,8 @@ extern "C"
 	DllExport int getWeaponProficiency(int index);
 	DllExport int getInitiativeBase(int index);
 	DllExport int getInitiative(int index);
-	DllExport int getDefenseBase(int index);
-	DllExport int getDefense(int index);
+	/*DllExport int getDefenseBase(int index);
+	DllExport int getDefense(int index);*/
 	DllExport int getHealthMax(int index);
 	DllExport float getHealth(int index);
 	DllExport float getHealSpeed(int index);

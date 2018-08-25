@@ -175,9 +175,9 @@ bool Character::buildDexterity()
 
 bool Character::buildAgility()
 {
-	switch (agility)
+	/*switch (agility)
 	{
-		/*case 1: initiativeBase = 4; dodgeBase = -4; walkSpeed = 2; combatSpeed = 10; runSpeed = 20; travelSpeed = 3; break;
+		case 1: initiativeBase = 4; dodgeBase = -4; walkSpeed = 2; combatSpeed = 10; runSpeed = 20; travelSpeed = 3; break;
 		case 2: initiativeBase = 3; dodgeBase = -3; walkSpeed = 4; combatSpeed = 20; runSpeed = 30; travelSpeed = 6; break;
 		case 3: initiativeBase = 2; dodgeBase = -2; walkSpeed = 6; combatSpeed = 20; runSpeed = 40; travelSpeed = 12; break;
 		case 4: initiativeBase = 2; dodgeBase = -2; walkSpeed = 6; combatSpeed = 20; runSpeed = 45; travelSpeed = 12; break;
@@ -194,10 +194,10 @@ bool Character::buildAgility()
 		case 15: initiativeBase = -1; dodgeBase = 3; walkSpeed = 18; combatSpeed = 35; runSpeed = 60; travelSpeed = 32; break;
 		case 16: initiativeBase = -2; dodgeBase = 4; walkSpeed = 20; combatSpeed = 40; runSpeed = 70; travelSpeed = 36; break;
 		case 17: initiativeBase = -2; dodgeBase = 6; walkSpeed = 21; combatSpeed = 45; runSpeed = 80; travelSpeed = 38; break;
-		case 18: initiativeBase = -3; dodgeBase = 7; walkSpeed = 24; combatSpeed = 50; runSpeed = 90; travelSpeed = 40; break;*/
+		case 18: initiativeBase = -3; dodgeBase = 7; walkSpeed = 24; combatSpeed = 50; runSpeed = 90; travelSpeed = 40; break;
 		default: return false;
 	}
-	initiative = initiativeBase;
+	initiative = initiativeBase;*/
 	return true;
 }
 

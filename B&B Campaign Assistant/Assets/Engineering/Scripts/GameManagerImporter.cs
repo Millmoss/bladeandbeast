@@ -91,7 +91,7 @@ public class GameManagerImporter : MonoBehaviour
 		setBaseHeight(0, 49);
 		setBaseWeight(0, 179);*/
 
-		print(getStrength(0));
+		/*print(getStrength(0));
 		print(getDexterity(0));
 		print(getAgility(0));
 		print(getConstitution(0));
