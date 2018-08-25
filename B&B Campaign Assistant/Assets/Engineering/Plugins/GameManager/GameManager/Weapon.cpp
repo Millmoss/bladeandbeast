@@ -9,8 +9,3 @@ Weapon::~Weapon()
 {
 
 }
-
-bool Weapon::addForm(char *formData)
-{
-	return true;
-}

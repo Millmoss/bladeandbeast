@@ -1,4 +1,7 @@
 ﻿  DataManager.cpp
+c:\users\administrator\desktop\bladeandbeast\b&b campaign assistant\assets\engineering\plugins\gamemanager\gamemanager\datamanager.cpp(82): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\administrator\desktop\bladeandbeast\b&b campaign assistant\assets\engineering\plugins\gamemanager\gamemanager\datamanager.cpp(84): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\administrator\desktop\bladeandbeast\b&b campaign assistant\assets\engineering\plugins\gamemanager\gamemanager\datamanager.cpp(86): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\utility(320): warning C4200: nonstandard extension used: zero-sized array in struct/union
   c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\utility(320): note: This member will be ignored by a defaulted constructor or copy/move assignment operator
   c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\vector(1849): note: see reference to class template instantiation 'std::pair<const _Kty,_Ty>' being compiled

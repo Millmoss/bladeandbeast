@@ -10,67 +10,71 @@ class Weapon : Item
 public:
 	Weapon();
 	~Weapon();
-	bool addForm(char *formData);
 protected:
 	//base information
-	int forms;				//forms
-	char **form;			//name of corresponding form
-	int *hands;				//hands required to use corresponding form
-	bool *cut;				//if the form can cut
-	bool *crush;			//if the form can crush
-	bool *stab;				//if the form can stab
-	bool *ranged;			//if the form is ranged
+	int minHands;			//hands required to use corresponding weapon
+	int liftStrength;		//strength needed to be able to lift the weapon
+	int oneHandStrength;	//strength needed to use the weapon in one hand
+	bool cut;				//if the weapon can cut
+	bool crush;				//if the weapon can crush
+	bool stab;				//if the weapon can stab
+	bool ranged;			//if the weapon is ranged
+	float drawTime;			//time to draw the weapon
+	float toCutTime;		//time to switch to or from a cutting attack, for all switches, the larger number of the switch is taken
+	float toCrushTime;		//time to switch to or from a crushing attack
+	float toStabTime;		//time to switch to or from a stabbing attack
+	float toRangedTime;		//time to switch to or from a ranged attack
 	
 	//generic upgradeable stats
-	int *draw;				//the amount of time it takes to prepare the weapon for use in combat
+	int draw;				//a skill affecting draw time and time to switch attack types
 
 	//melee effective upgradeable stats
-	int *parry;				//the form's parrying capability (0 means it cannot effectively parry)
-	int *feint;				//the form's feinting capability (0 means it cannot effectively feint)
+	int parry;				//number representing weapon's pure defense given by a parry, note that a parry represents both the parrying and the best possible movement with that parry,
+							//so you can't dodge while parrying basically
+	int feint;				//the weapon's feinting capability as a number the opponent must roll against, the feint takes the amount of time of that attack type
+							//an opponent probably will not care about a feint if they are too protected
 
 	//ranged effective upgradeable stats
-	int *aim;				//the form's aiming capability (0 means it cannot effectively be aimed)
+	int aim;				//the weapon's aiming capability
+	float aimTime;			//the speed at which the weapon can be aimed
 
 	//melee weapon specific stats, not used if not melee
-	int *cutDice;			//damage die count for a cut attack
-	int *cutDamage;			//damage die type for a cut attack
-	int *cutMod;			//damage modifier for a cut attack
-	float *cutReach;		//the reach of a cut attack, crush attacks suffer more penalties if the opponent is farther within or out of reach
-	float *cutArc;			//the area of the cut's arc, if this is not fully available, the attack will suffer penalties
-	float *cutHeight;		//the height that must be available for the cut, if it is not available, the attack will suffer penalties
-	float *cutTime;			//the time it takes to make a cut attack
-	int *cutCutting;		//the actual cutting value of the cut
-	int *cutCrusing;		//the crushing value of the cut
-	int *cutStabbing;		//the stabbing value of the cut
+	int cutDice;			//damage die count for a cut attack
+	int cutDamage;			//damage die type for a cut attack
+	int cutMod;			//damage modifier for a cut attack
+	float cutReach;		//the reach of a cut attack, crush attacks suffer more penalties if the opponent is farther within or out of reach
+	float cutArc;			//the area of the cut's arc, if this is not fully available, the attack will suffer penalties, measured in radians
+	float cutTime;			//the time it takes to make a cut attack
+	int cutCut;		//the actual cutting value of the cut
+	int cutCrush;		//the crushing value of the cut
+	int cutStab;		//the stabbing value of the cut
 
-	int *crushDice;			//damage die count for a crush attack
-	int *crushDamage;		//damage die type for a crush attack
-	int *crushMod;			//damage modifier for a crush attack
-	float *crushReach;		//the reach of a crush attack, crush attacks suffer more penalties if the opponent is farther within or out of reach
-	float *crushArc;		//the area of the crush's arc, if this is not fully available, the attack will suffer penalties
-	float *crushHeight;		//the height that must be available for the crush, if it is not available, the attack will suffer penalties
-	float *crushTime;		//the time it takes to make a crush attack
-	int *crushCutting;		//the actual cutting value of the crush
-	int *crushCrusing;		//the crushing value of the crush
-	int *crushStabbing;		//the stabbing value of the crush
+	int crushDice;			//damage die count for a crush attack
+	int crushDamage;		//damage die type for a crush attack
+	int crushMod;			//damage modifier for a crush attack
+	float crushReach;		//the reach of a crush attack, crush attacks suffer more penalties if the opponent is farther within or out of reach
+	float crushArc;		//the area of the crush's arc, if this is not fully available, the attack will suffer penalties
+	float crushTime;		//the time it takes to make a crush attack
+	int crushCut;		//the actual cutting value of the crush
+	int crushCrush;		//the crushing value of the crush
+	int crushStab;		//the stabbing value of the crush
 
-	int *stabDice;			//damage die count for a stab attack
-	int *stabDamage;		//damage die type for a stab attack
-	int *stabMod;			//damage modifier for a stab attack
-	float *stabReach;		//the reach of a stab attack, stab attacks massively penalized if opponent is within the weapon length or outside of reach
-	float *stabArc;			//the area of the stab's arc, if this is not fully available, the attack will suffer penalties
-	float *stabHeight;		//the height that must be available for the stab, if it is not available, the attack will suffer penalties
-	float *stabTime;		//the time it takes to make a stab attack
-	int *stabCutting;		//the actual cutting value of the stab
-	int *stabCrusing;		//the crushing value of the stab
-	int *stabStabbing;		//the stabbing value of the stab
+	int stabDice;			//damage die count for a stab attack
+	int stabDamage;		//damage die type for a stab attack
+	int stabMod;			//damage modifier for a stab attack
+	float stabReach;		//the reach of a stab attack, stab attacks massively penalized if opponent is within the weapon length or outside of reach
+	float stabArc;			//the area of the stab's arc, if this is not fully available, the attack will suffer penalties
+	float stabTime;		//the time it takes to make a stab attack
+	int stabCut;		//the actual cutting value of the stab
+	int stabCrush;		//the crushing value of the stab
+	int stabStab;		//the stabbing value of the stab
 
 	//ranged weapon specific stats, not used if not ranged
 	//THESE STATS WILL NEED TO BE COMPLETELY REWORKED, THEY NEED TO USE A FAIRLY MORE COMPLEX SYSTEM
-	int *poundage;			//the poundage that can be fired with, affected by strength and training
-	float *reloadTime;		//the time it takes to prepare a round for firing
-	float *fireTime;		//the time it takes to fire a round
-	int *projectiles;		//the number of projectiles fired at one time
+	int poundage;			//the poundage that can be fired with, affected by strength and training
+	float reloadTime;		//the time it takes to prepare a round for firing
+	float fireTime;			//the time it takes to fire a round, usually this is like .1 or less seconds
+	int projectiles;		//the number of projectiles fired at one time
 	//note that all attacks made with a ranged weapon are crush and stab
 
 	//INFO ON COMBAT:

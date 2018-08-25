@@ -1,0 +1,14 @@
+Blade&BeastData\Items\Armor\SteelCuirass.blade
+Shoulders
+8, 2, 8
+Back
+20, 5, 20
+Abdomen
+20, 5, 20
+Chest
+20, 5, 20
+Blade&BeastData\Items\Weapons\BOBERT.txt
+Blade&BeastData\Items\Weapons\TOBERT.txt
+Blade&BeastData\Characters\BOBERT.txt
+Blade&BeastData\Characters\example.blade
+Blade&BeastData\Characters\TOBERT.txt

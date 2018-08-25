@@ -2,15 +2,18 @@
 
 Armor::Armor() : Item()
 {
+	name = NULL;
+	description = NULL;
 }
 
-Armor::Armor(char *n, float w, float p, float dur, int dtc, std::unordered_map<std::string, int *> def) : Item()
+Armor::Armor(char *n, float w, float p, float dur, char *desc, int dtc, std::unordered_map<std::string, int *> def) : Item()
 {
 	//armorData is the parsed and edited data from the .blade file to be set as defense
 	name = n;
 	weight = w;
 	price = p;
 	durability = dur;
+	description = desc;
 	damageTypeCount = dtc;
 	defense = def;
 }
@@ -38,13 +41,18 @@ int Armor::getDefense(char *location, int hit, int *damageTypes)		//damage shoul
 
 void Armor::writeTo(FILE *f)
 {
-	fprintf_s(f, "%s\n", name);
-	fprintf_s(f, "%f\n", weight);
-	fprintf_s(f, "%f\n", price);
+	for (unsigned i = 0; i < defense.bucket_count(); ++i)
+	for (auto local_it = defense.begin(i); local_it != defense.end(i); ++local_it)
+	{
+		fprintf_s(f, "%s\n", (local_it->first).c_str());
+		fprintf_s(f, "%d, %d, %d\n", defense[local_it->first][0], defense[local_it->first][1], defense[local_it->first][2]);
+	}
 }
-
 
 Armor::~Armor()
 {
-	free(name);
+	if (name != NULL)
+		free(name);
+	if (description != NULL)
+		free(description);
 }
