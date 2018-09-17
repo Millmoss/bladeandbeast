@@ -240,7 +240,7 @@ Weapon DataManager::createWeapon(const char *f)
 		return Weapon();
 }
 
-Weapon DataManager::createWeapon(const char *f)
+Item DataManager::createMisc(const char *f)
 {
 	FILE *aFile;
 	fopen_s(&aFile, f, "r");
@@ -271,7 +271,7 @@ Weapon DataManager::createWeapon(const char *f)
 					if (c == EOF)
 					{
 						fclose(aFile);
-						return Armor();
+						return Item();
 					}
 					data[pos] = c;
 					pos++;
@@ -337,10 +337,10 @@ Weapon DataManager::createWeapon(const char *f)
 			}
 		}
 		fclose(aFile);
-		return Armor(n, w, p, dur, desc, dtc, def);
+		return Item();
 	}
 	else
-		return Armor();
+		return Item();
 }
 
 DataManager::~DataManager()
