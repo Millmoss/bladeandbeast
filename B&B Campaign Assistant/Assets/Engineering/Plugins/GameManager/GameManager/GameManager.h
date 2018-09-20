@@ -35,18 +35,12 @@ extern "C"
 	//exported save methods
 	DllExport bool saveCharacter(int index);
 
+	DllExport char *getCharacterList();
+
 	//exported character set methods
 	DllExport int setName(int index, char *name);
-	DllExport int setStrength(int index, int s);
-	DllExport int setDexterity(int index, int d);
-	DllExport int setAgility(int index, int a);
-	DllExport int setConstitution(int index, int c);
-	DllExport int setIntellect(int index, int i);
-	DllExport int setWillpower(int index, int w);
-	DllExport int setPerception(int index, int p);
-	DllExport int setCharisma(int index, int c);
-	DllExport int setBeauty(int index, int b);
-	DllExport int setBirth(int index, int y, int d, int s);
+	DllExport int setStat(int index, int number, int stat);
+	DllExport int setBirth(int index, int date, int ymd);
 	DllExport int setBaseHeight(int index, float h);
 	DllExport int setBaseWeight(int index, float w);
 

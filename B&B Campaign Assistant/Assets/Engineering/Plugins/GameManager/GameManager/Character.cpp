@@ -1,6 +1,6 @@
 #include "Character.h"
 
-Character::Character() : Entity()
+Character::Character() : Being()
 {
 	type = (char *)malloc(sizeof(char) * 6);
 	strcpy_s(type, sizeof(6 * sizeof(char)), "human\0");
@@ -28,7 +28,6 @@ Character::Character() : Entity()
 	restrict = 0;
 	overheatMax = -1;
 	overheat = 0;
-	damageBonus = 0;
 	carryMax = -1;
 	carry = 0;
 	liftMax = -1;
@@ -55,16 +54,18 @@ Character::~Character()
 		free(eyesight);
 }
 
-void Character::setStrength(int s) { strength = s; }
+void Character::setStrength(int s) { strength = s; restrictMax = s; }
 void Character::setDexterity(int d) { dexterity = d; }
 void Character::setAgility(int a) { agility = a; }
-void Character::setConstitution(int c) { constitution = c; }
+void Character::setConstitution(int c) { constitution = c; healthMax = c; health = c; overheatMax = c; }
 void Character::setIntellect(int i) { intellect = i; }
-void Character::setWillpower(int w) { willpower = w; }
+void Character::setWillpower(int w) { willpower = w; resolve = w; }
 void Character::setPerception(int p) { perception = p; }
 void Character::setCharisma(int c) { charisma = c; }
 void Character::setBeauty(int b) { beauty = b; }
-void Character::setBirth(int y, int d, int s) { years = y; days = d; seconds = s; }
+void Character::setYears(int y) { years = y; }
+void Character::setDays(int d) { days = d; }
+void Character::setSeconds(int s) { seconds = s; }
 void Character::setBaseHeight(float h) { baseHeight = h; height = h; }
 void Character::setBaseWeight(float w) { baseWeight = w; weight = w; }
 
@@ -101,7 +102,7 @@ bool Character::buildCharacter()
 		bool success = buildPerception();
 		totalSuccess = (totalSuccess && success);
 	}
-	if (intellect != -1)
+	if(intellect != -1)
 	{
 
 	}
@@ -123,7 +124,7 @@ bool Character::buildStrength()
 	carry = 0;
 	switch (strength)
 	{
-		case 1: damageBonus = -4; carryMax = 5; liftMax = 20; break;
+		/*case 1: damageBonus = -4; carryMax = 5; liftMax = 20; break;
 		case 2: damageBonus = -2; carryMax = 10; liftMax = 30; break;
 		case 3: damageBonus = -1; carryMax = 20; liftMax = 50; break;
 		case 4: damageBonus = 0; carryMax = 30; liftMax = 70; break;
@@ -140,7 +141,7 @@ bool Character::buildStrength()
 		case 15: damageBonus = 2; carryMax = 70; liftMax = 400; break;
 		case 16: damageBonus = 3; carryMax = 90; liftMax = 500; break;
 		case 17: damageBonus = 3; carryMax = 120; liftMax = 620; break;
-		case 18: damageBonus = 4; carryMax = 150; liftMax = 750; break;
+		case 18: damageBonus = 4; carryMax = 150; liftMax = 750; break;*/
 		default: return false;
 	}
 	return true;
@@ -282,7 +283,6 @@ int Character::getRestrictMax() { return restrictMax; }
 int Character::getRestrict() { return restrict; }
 int Character::getOverheatMax() { return overheatMax; }
 int Character::getOverheat() { return overheat; }
-int Character::getDamageBonus() { return damageBonus; }
 int Character::getCarryMax() { return carryMax; }
 float Character::getCarry() { return carry; }
 int Character::getLiftMax() { return liftMax; }

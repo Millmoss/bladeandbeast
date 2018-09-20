@@ -1,14 +1,14 @@
 #include <iostream>
 #include <stdlib.h>
 #include <stack>
-#include "Entity.h"
+#include "Being.h"
 #include "Weapon.h"
 #include "Armor.h"
 
 #ifndef __CHARACTER_H_INCLUDED__
 #define __CHARACTER_H_INCLUDED__
 
-class Character : public Entity		//TODO	Implement effects of age, effects of agility/strength on height/weight, skills
+class Character : public Being		//TODO	Implement effects of age, effects of agility/strength on height/weight, skills
 {
 public:
 	//construction methods
@@ -25,7 +25,9 @@ public:
 	void setPerception(int p);			//
 	void setCharisma(int c);			//
 	void setBeauty(int b);				//
-	void setBirth(int y, int d, int s);	//earth years, days, and seconds since character birth upon character initialization
+	void setYears(int y);				//birth info
+	void setDays(int d);
+	void setSeconds(int s);
 	void setBaseHeight(float h);
 	void setBaseWeight(float w);
 	
@@ -55,7 +57,6 @@ public:
 	int getRestrict();
 	int getOverheatMax();
 	int getOverheat();
-	int getDamageBonus();
 	int getCarryMax();
 	float getCarry();
 	int getLiftMax();
@@ -95,25 +96,31 @@ private:
 	int restrict;						//
 	int overheatMax;					//
 	int overheat;						//
-	int damageBonus;					//damage bonus on strength weapons
 	int carryMax;						//carry weight
 	float carry;						//weight carried
 	int liftMax;						//lift weight
+	bool buildCarry();					//carry and lift setup
 	int weaponProficiency;				//the number of points a character gets to put toward broad weapon skill modifiers
+	bool buildProficiency;				//what stat was this dependant on? int?
 	int initiativeBase;					//base initiative
 	int initiative;						//total initiative
+	bool buildInitiative();				//initiative setup
 	int healthMax;						//max health
 	int dodgeBase;						//the base dodge capability of the character
+	bool buildDodge();					//dodge setup
 	float health;						//health
-	float healSpeed;					//speed of healing
-	float baseWeight;					//weight as set by player and affected by strength
-	float baseHeight;					//height as set by player and affected by agility
+	float healSpeed;					//speed of healing SET THIS IN CONSTITUTION SET
+	float baseWeight;					//weight as set by player
+	float baseHeight;					//height as set by player
 	float weight;						//weight with all factors
+	bool buildWeight();					//recompute weight
 	float height;						//height with all factors
+	bool buildHeight();					//recompute height
 	int resolve;						//
 	int sorceryBonus;					//
 	int eyeglassesBonus;				//
 	char *eyesight;						//
+	bool buildEyesight();				//eyesight setup
 
 	//defense stats
 	//these stats all represent the base defense a person's body provides against attacks
@@ -123,6 +130,7 @@ private:
 	//0 is cut damage, 1 is crush damage, and 2 is stab damage
 	//other damage types can be added, but input files will have to be edited to account for that damage type
 	std::unordered_map<std::string, int *> defense;
+	std::unordered_map<std::string, Armor *> armors;
 
 	//passive basic combat skills
 	int awareness;	//awareness of battle environment. Reduced weather penalties, allows for waiting on multiple opponents at higher levels
@@ -162,14 +170,19 @@ private:
 	float trainingConstitution;			//trained through travel, eating, etc
 	std::stack<float> hoursConstitution;
 	float trainingIntellect;			//trained through reading, travel, etc
+	float trainingIntellectMin;			//a training minimum equal to two-thirds of the max achieved intellect training
 	std::stack<float> hoursIntellect;
-	float trainingWillpower;			//trained through ???
+	float trainingWillpower;			//trained through meditation and ???
+	float trainingWillpowerMin;			//a training minimum equal to half of the max achieved willpower training
 	std::stack<float> hoursWillpower;
 	float trainingPerception;			//trained through ???
+	float trainingPerceptionMin;		//a training minimum equal to a quarter of the max achieved perception training
 	std::stack<float> hoursPerception;
 	float trainingCharisma;				//trained through social interaction, reading, etc
+	float trainingCharismaMin;			//a training minimum equal to half of the max achieved charisma training
 	std::stack<float> hoursCharisma;
 	float trainingBeauty;				//trained through looking in a mirror and worrying about your looks
+	float trainingBeautyMin;			//a training minimum equal to half of the max achieved beauty training
 	std::stack<float> hoursBeauty;
 
 	//IMPLEMENT SKILL TREES FOR COMBAT AND ADVENTURE SKILLS
