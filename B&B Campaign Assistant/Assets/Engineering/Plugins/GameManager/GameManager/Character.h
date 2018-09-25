@@ -28,17 +28,11 @@ public:
 	void setYears(int y);				//birth info
 	void setDays(int d);
 	void setSeconds(int s);
-	void setBaseHeight(float h);
-	void setBaseWeight(float w);
+	void setHeight(float h);
+	void setWeight(float w);
 	
 	//runtime methods
 	bool buildCharacter();				//builds the character from all input information. if information needed is missing, returns false
-	bool buildStrength();
-	bool buildDexterity();
-	bool buildAgility();
-	bool buildConstitution();
-	bool buildWillpower();
-	bool buildPerception();
 	
 	//get methods
 	char *getName();
@@ -54,73 +48,115 @@ public:
 	char *getAge();
 
 	int getRestrictMax();
+	int getRestrictMaxMod();
 	int getRestrict();
 	int getOverheatMax();
+	int getOverheatMaxMod();
 	int getOverheat();
 	int getCarryMax();
+	int getCarryMaxMod();
 	float getCarry();
 	int getLiftMax();
-	int getWeaponProficiency();
-	int getInitiativeBase();
-	int getInitiative();
-	int getDodgeBase();
+	int getLiftMaxMod();
+	int getProficiencyPoints();
+	int getSpeed();
+	int getSpeedMod();
 	int getDodge();
+	int getDodgeMod();
 	int getHealthMax();
+	int getHealthMaxMod();
 	float getHealth();
-	float getHealSpeed();
-	float getBaseWeight();
-	float getBaseHeight();
-	float getWeight();
+	float getHealthMod();
+	float getHealRate();
+	float getHealRateMod();
 	float getHeight();
+	float getHeightMod();
+	float getWeight();
+	float getWeightMod();
 	int getResolve();
+	int getResolveMod();
 	int getSorceryBonus();
+	int getSorceryBonusMod();
 	int getEyeglassesBonus();
+	int getEyeglassesBonusMod();
 	char *getEyesight();
 private:
 	//base stats
 	int strength;						//3d6 for humans
+	int strengthMod;					//
 	int dexterity;						//3d6 for humans
+	int dexterityMod;					//
 	int agility;						//3d6 for humans
+	int agilityMod;						//
 	int constitution;					//3d6 for humans
+	int constitutionMod;				//
 	int intellect;						//3d6 for humans
+	int intellectMod;					//
 	int willpower;						//3d6 for humans
+	int willpowerMod;					//
 	int perception;						//3d6 for humans
+	int perceptionMod;					//
 	int charisma;						//3d6 for humans
+	int charismaMod;					//
 	int beauty;							//3d6 for humans
+	int beautyMod;						//
 	int years;							//number of earth years old
 	int days;							//number of earth days since earth birthdate
 	int seconds;						//number of earth seconds since earth 24-hour clock time of birth
 	
 	//general dependant stats
-	int restrictMax;					//
+	int restrictMax;				//
+	int restrictMaxMod;					//
 	int restrict;						//
-	int overheatMax;					//
+
+	int overheatMax;				//
+	int overheatMaxMod;					//
 	int overheat;						//
-	int carryMax;						//carry weight
+
+	int carryMax;					//carryable weight
+	int carryMaxMod;					//mod on carryable weight
 	float carry;						//weight carried
-	int liftMax;						//lift weight
+
+	int liftMax;					//lift weight
+	int liftMaxMod;						//mod on lift weight
+
 	bool buildCarry();					//carry and lift setup
-	int weaponProficiency;				//the number of points a character gets to put toward broad weapon skill modifiers
-	bool buildProficiency;				//what stat was this dependant on? int?
-	int initiativeBase;					//base initiative
-	int initiative;						//total initiative
-	bool buildInitiative();				//initiative setup
-	int healthMax;						//max health
-	int dodgeBase;						//the base dodge capability of the character
-	bool buildDodge();					//dodge setup
+
+	int proficiencyPoints;				//proficiency points are used to allocate proficiencies at the start of the game
+	bool buildProficiency();			//give starting proficiency points
+
+	int speed;						//base speed
+	int speedMod;						//mod on speed
+
+	int healthMax;					//max health
+	int healthMaxMod;					//mod on max health
+
+	int dodge;						//base dodge capability
+	int dodgeMod;						//mod on dodge capability
+
 	float health;						//health
-	float healSpeed;					//speed of healing SET THIS IN CONSTITUTION SET
-	float baseWeight;					//weight as set by player
-	float baseHeight;					//height as set by player
-	float weight;						//weight with all factors
-	bool buildWeight();					//recompute weight
-	float height;						//height with all factors
-	bool buildHeight();					//recompute height
+	float healthMod;					//mod on health, ignores healthMax
+	float healRate;					//speed of healing
+	float healRateMod;					//mod on speed of healing
+
+	float height;					//height as set by player
+	float heightMod;					//mod on height
+	bool buildHeightMod();				//recompute height mod
+	float weight;					//weight as set by player
+	float weightMod;					//mod on weight
+	bool buildWeightMod();				//recompute weight mod
+
 	int resolve;						//
+	int resolveMod;						//mod on resolve
 	int sorceryBonus;					//
+	int sorceryBonusMod;				//
+	bool buildSorcery();				//sorceryBonus setup
 	int eyeglassesBonus;				//
+	int eyeglassesBonusMod;				//
 	char *eyesight;						//
 	bool buildEyesight();				//eyesight setup
+
+	bool buildAgilityStats();			//builds jump, speed, move, and dodge
 
 	//defense stats
 	//these stats all represent the base defense a person's body provides against attacks

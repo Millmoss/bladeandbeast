@@ -2,7 +2,16 @@
 
 Being::Being()
 {
-
+	name = NULL;
+	type = NULL;
+	walkMove = -1;
+	combatMove = -1;
+	runMove = -1;
+	travelMove = -1;
+	jumpHeight = -1;
+	hands = -1;
+	hand = NULL;
+	weaponEquipped = NULL;
 }
 
 void Being::setName(char *n)
