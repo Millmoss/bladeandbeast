@@ -2,14 +2,11 @@
 
 Character::Character() : Being()
 {
-	type = (char *)malloc(sizeof(char) * 6);
-	strcpy_s(type, sizeof(6 * sizeof(char)), "human\0");
+	type = "human";
 	hands = 2;
-	hand = (char **)malloc(hands * sizeof(char *));
-	hand[0] = (char *)malloc(5 * sizeof(char));
-	strcpy_s(hand[0], sizeof(5 * sizeof(char)), "left\0");
-	hand[1] = (char *)malloc(6 * sizeof(char));
-	strcpy_s(hand[1], sizeof(6 * sizeof(char)), "right\0");
+	hand = new std::string[2];
+	hand[0] = "left";
+	hand[1] = "right";
 	weaponEquipped = new Weapon[2];
 	strength = -1;
 	strengthMod = 0;
@@ -25,8 +22,8 @@ Character::Character() : Being()
 	willpowerMod = 0;
 	perception = -1;
 	perceptionMod = 0;
-	charisma = -1;
-	charismaMod = 0;
+	communication = -1;
+	communicationMod = 0;
 	beauty = -1;
 	beautyMod = 0;
 	years = -1;
@@ -52,24 +49,22 @@ Character::Character() : Being()
 	healthMod = 0;
 	healRate = -1;
 	healRateMod = -1;
-	weight = -1;
 	height = -1;
-	weightMod = 0;
 	heightMod = 0;
+	weight = -1;
+	weightMod = 0;
 	resolve = -1;
 	resolveMod = 0;
 	sorceryBonus = -1;
 	sorceryBonusMod = 0;
 	eyeglassesBonus = -1;
 	eyeglassesBonusMod = 0;
-	eyesight = (char *)malloc(sizeof(char) * 16);
-	strcpy_s(eyesight, 16, "Unknown");
+	eyesight = "Unknown";
 }
 
 Character::~Character()
 {
-	if (eyesight != NULL)
-		free(eyesight);
+
 }
 
 void Character::setStrength(int s) { strength = s; restrictMax = s; }
@@ -79,7 +74,7 @@ void Character::setConstitution(int c) { constitution = c; float h = health; hea
 void Character::setIntellect(int i) { intellect = i; }
 void Character::setWillpower(int w) { willpower = w; resolve = w; }
 void Character::setPerception(int p) { perception = p; }
-void Character::setCharisma(int c) { charisma = c; }
+void Character::setCommunication(int c) { communication = c; }
 void Character::setBeauty(int b) { beauty = b; }
 void Character::setYears(int y) { years = y; }
 void Character::setDays(int d) { days = d; }
@@ -120,9 +115,9 @@ bool Character::buildCharacter()
 
 bool Character::buildCarry()
 {
-	restrictMax = strength;
-	restrict = 0;
-	carry = 0;
+	//combat load sources
+	//https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/455089/20150820-FOI06779_The_Soldiers_Load.pdf
+	//https://www.globalsecurity.org/military/library/report/call/call_01-15_ch11.htm
 	switch (strength)
 	{//FIX THIS
 		case 1: carryMax = 5; liftMax = 20; break;
@@ -152,24 +147,8 @@ bool Character::buildEyesight()
 {
 	switch (perception)
 	{//FIX THIS
-	case 1: eyesight = (char *)malloc(sizeof(char) * 32); strcpy_s(eyesight, sizeof(char) * 6, "Blind"); eyeglassesBonus = 5; break;
-	case 2: eyesight = (char *)malloc(sizeof(char) * 32); strcpy_s(eyesight, sizeof(char) * 14, "Legally Blind"); eyeglassesBonus = 4; break;
-	case 3: eyesight = (char *)malloc(sizeof(char) * 32); strcpy_s(eyesight, sizeof(char) * 14, "Legally Blind"); eyeglassesBonus = 3; break;
-	case 4: eyesight = (char *)malloc(sizeof(char) * 32); strcpy_s(eyesight, sizeof(char) * 4, "Bad"); eyeglassesBonus = 2; break;
-	case 5: eyesight = (char *)malloc(sizeof(char) * 32); strcpy_s(eyesight, sizeof(char) * 4, "Bad"); eyeglassesBonus = 2; break;
-	case 6: eyesight = (char *)malloc(sizeof(char) * 32); strcpy_s(eyesight, sizeof(char) * 7, "Normal"); eyeglassesBonus = 1; break;
-	case 7: eyesight = (char *)malloc(sizeof(char) * 32); strcpy_s(eyesight, sizeof(char) * 7, "Normal"); eyeglassesBonus = 1; break;
-	case 8: eyesight = (char *)malloc(sizeof(char) * 32); strcpy_s(eyesight, sizeof(char) * 7, "Normal"); eyeglassesBonus = 1; break;
-	case 9: eyesight = (char *)malloc(sizeof(char) * 32); strcpy_s(eyesight, sizeof(char) * 7, "Normal"); eyeglassesBonus = 1; break;
-	case 10: eyesight = (char *)malloc(sizeof(char) * 32); strcpy_s(eyesight, sizeof(char) * 7, "Normal"); eyeglassesBonus = 1; break;
-	case 11: eyesight = (char *)malloc(sizeof(char) * 32); strcpy_s(eyesight, sizeof(char) * 7, "Normal"); eyeglassesBonus = 1; break;
-	case 12: eyesight = (char *)malloc(sizeof(char) * 32); strcpy_s(eyesight, sizeof(char) * 7, "Normal"); eyeglassesBonus = 1; break;
-	case 13: eyesight = (char *)malloc(sizeof(char) * 32); strcpy_s(eyesight, sizeof(char) * 7, "Normal"); eyeglassesBonus = 1; break;
-	case 14: eyesight = (char *)malloc(sizeof(char) * 32); strcpy_s(eyesight, sizeof(char) * 5, "Good"); eyeglassesBonus = 0; break;
-	case 15: eyesight = (char *)malloc(sizeof(char) * 32); strcpy_s(eyesight, sizeof(char) * 5, "Good"); eyeglassesBonus = 0; break;
-	case 16: eyesight = (char *)malloc(sizeof(char) * 32); strcpy_s(eyesight, sizeof(char) * 5, "Good"); eyeglassesBonus = 0; break;
-	case 17: eyesight = (char *)malloc(sizeof(char) * 32); strcpy_s(eyesight, sizeof(char) * 5, "Good"); eyeglassesBonus = 0; break;
-	case 18: eyesight = (char *)malloc(sizeof(char) * 32); strcpy_s(eyesight, sizeof(char) * 5, "Good"); eyeglassesBonus = 0; break;
+	case 1: eyesight = "Blind"; eyeglassesBonus = 5; break;
+	case 18: eyesight = "Excellent"; eyeglassesBonus = 0; break;
 	default: return false;
 	}
 	return true;
@@ -223,13 +202,13 @@ bool Character::buildAgilityStats()
 		case 15: speed = -1; dodge = 3; walkMove = 18; combatMove = 35; runMove = 60; travelMove = 32; break;
 		case 16: speed = -2; dodge = 4; walkMove = 20; combatMove = 40; runMove = 70; travelMove = 36; break;
 		case 17: speed = -2; dodge = 6; walkMove = 21; combatMove = 45; runMove = 80; travelMove = 38; break;
-		case 18: speed = -3; dodge = 7; walkMove = 24; combatMove = 50; runMove = 90; travelMove = 40; break;
+		case 25: speed = -3; dodge = 7; walkMove = 24; combatMove = 50; runMove = 90; travelMove = 40; break;
 		default: return false;
 	}
 	return true;
 }
 
-char *Character::getName() { return name; }
+std::string Character::getName() { return name; }
 int Character::getStrength() { return strength; }
 int Character::getDexterity() { return dexterity; }
 int Character::getAgility() { return agility; }
@@ -237,9 +216,9 @@ int Character::getConstitution() { return constitution; }
 int Character::getIntellect() { return intellect; }
 int Character::getWillpower() { return willpower; }
 int Character::getPerception() { return perception; }
-int Character::getCharisma() { return charisma; }
+int Character::getCommunication() { return communication; }
 int Character::getBeauty() { return beauty; }
-char *Character::getAge() { char *r = (char *)malloc(sizeof(char) * 32); sprintf_s(r, 32, "WOAH"); return r; }
+std::string Character::getAge() { std::string r = "WOAH"; return r; }
 
 int Character::getRestrictMax() { return restrictMax; }
 int Character::getRestrictMaxMod() { return restrictMaxMod; }
@@ -273,4 +252,4 @@ int Character::getSorceryBonus() { return sorceryBonus; }
 int Character::getSorceryBonusMod() { return sorceryBonusMod; }
 int Character::getEyeglassesBonus() { return eyeglassesBonus; }
 int Character::getEyeglassesBonusMod() { return eyeglassesBonusMod; }
-char *Character::getEyesight() { return eyesight; }
+std::string Character::getEyesight() { return eyesight; }

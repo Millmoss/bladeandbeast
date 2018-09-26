@@ -7,14 +7,14 @@
 class Item
 {
 public:
-	Item();				//
+	Item();						//
 	~Item();
 protected:
-	char *name;			//name
-	float weight;		//weight
-	float price;		//price
-	char *description;	//description of the item
-	float durability;	//number representing the amount of "health" the functional portion of the item has. higher numbers are better. when this reaches 0 the item is unusable
+	std::string name;			//name
+	float weight;				//weight
+	float price;				//price
+	std::string description;	//description of the item
+	float durability;			//number representing the amount of "health" the functional portion of the item has. higher numbers are better. when this reaches 0 the item is unusable
 };
 
 #endif

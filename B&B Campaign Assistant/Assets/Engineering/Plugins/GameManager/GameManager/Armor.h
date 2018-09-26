@@ -10,8 +10,8 @@ class Armor : Item
 {
 public:
 	Armor();
-	Armor(char *n, float w, float p, float dur, char *desc, int dtc, std::unordered_map<std::string, int *> def);
-	int getDefense(char *location, int hit, int *damageTypes);	//gets the damage reduction on the attack
+	Armor(std::string n, float w, float p, float dur, std::string desc, int dtc, std::unordered_map<std::string, int *> def);
+	int getDefense(std::string location, int hit, int *damageTypes);	//gets the damage reduction on the attack
 	void writeTo(FILE *f);
 	~Armor();
 protected:

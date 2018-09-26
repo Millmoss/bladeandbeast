@@ -2,8 +2,8 @@
 
 Being::Being()
 {
-	name = NULL;
-	type = NULL;
+	name = "NULL";
+	type = "NULL";
 	walkMove = -1;
 	combatMove = -1;
 	runMove = -1;
@@ -14,25 +14,15 @@ Being::Being()
 	weaponEquipped = NULL;
 }
 
-void Being::setName(char *n)
+void Being::setName(std::string n)
 {
-	name = (char *)malloc(64 * sizeof(char));
-	strcpy_s(name, 64, n);
+	name = n;
 }
 
 Being::~Being()
 {
-	if (name != NULL)
-		free(name);
-	if (type != NULL)
-		free(type);
 	if (hand != NULL)
 	{
-		if (hands != 0)
-		{
-			for (int i = 0; i < hands; i++)
-				free(hand[i]);
-		}
 		free(hand);
 	}
 	if (weaponEquipped != NULL)

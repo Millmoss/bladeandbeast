@@ -2,11 +2,11 @@
 
 Armor::Armor() : Item()
 {
-	name = NULL;
-	description = NULL;
+	name = "NULL";
+	description = "NULL";
 }
 
-Armor::Armor(char *n, float w, float p, float dur, char *desc, int dtc, std::unordered_map<std::string, int *> def) : Item()
+Armor::Armor(std::string n, float w, float p, float dur, std::string desc, int dtc, std::unordered_map<std::string, int *> def) : Item()
 {
 	//armorData is the parsed and edited data from the .blade file to be set as defense
 	name = n;
@@ -18,21 +18,21 @@ Armor::Armor(char *n, float w, float p, float dur, char *desc, int dtc, std::uno
 	defense = def;
 }
 
-int Armor::getDefense(char *location, int hit, int *damageTypes)		//damage should be the length of all damage types in the ruleset (3 currently)
+int Armor::getDefense(std::string location, int hit, int *damageTypes)		//damage should be the length of all damage types in the ruleset (3 currently)
 {
 	//determines first which damage type exceeds the armor's defense the most
 	//then reduces the hit by the difference between the armor's defense and the damage type
 	//if the reduction would positively impact the hit, it is not applied
 	int dif = 0;
-	if (defense.find(std::string(location)) != defense.end())
+	if (defense.find(location) != defense.end())
 	{
 		int hi = 0;
 		for (int i = 0; i < damageTypeCount; i++)
 		{
-			if (damageTypes[i] + hit - defense[std::string(location)][i] > damageTypes[hi] + hit - defense[std::string(location)][hi])
+			if (damageTypes[i] + hit - defense[location][i] > damageTypes[hi] + hit - defense[location][hi])
 				dif = i;
 		}
-		dif = damageTypes[hi] + hit - defense[std::string(location)][hi];
+		dif = damageTypes[hi] + hit - defense[location][hi];
 		if (dif < 0)
 			dif = 0;
 	}
@@ -51,8 +51,5 @@ void Armor::writeTo(FILE *f)
 
 Armor::~Armor()
 {
-	if (name != NULL)
-		free(name);
-	if (description != NULL)
-		free(description);
+
 }
