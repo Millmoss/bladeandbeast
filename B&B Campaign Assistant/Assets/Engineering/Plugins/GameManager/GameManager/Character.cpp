@@ -40,7 +40,7 @@ Character::Character() : Being()
 	carry = 0;
 	liftMax = -1;
 	liftMaxMod = 0;
-	proficiencyPoints = -1;
+	skillPoints = -1;
 	speed = -1;
 	speedMod = 0;
 	healthMax = -1;
@@ -105,9 +105,9 @@ bool Character::buildCharacter()
 		bool success = buildSorcery();
 		totalSuccess = (totalSuccess && success);
 	}
-	if (proficiencyPoints == -1)
+	if (skillPoints == -1)
 	{
-		bool success = buildProficiency();
+		bool success = buildSkill();
 		totalSuccess = (totalSuccess && success);
 	}
 	return totalSuccess;
@@ -231,7 +231,7 @@ int Character::getCarryMaxMod() { return carryMaxMod; }
 float Character::getCarry() { return carry; }
 int Character::getLiftMax() { return liftMax; }
 int Character::getLiftMaxMod() { return liftMaxMod; }
-int Character::getProficiencyPoints() { return proficiencyPoints; }
+int Character::getSkillPoints() { return skillPoints; }
 int Character::getSpeed() { return speed; }
 int Character::getSpeedMod() { return speedMod; }
 int Character::getDodge() {	return dodge; }

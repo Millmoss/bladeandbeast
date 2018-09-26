@@ -58,7 +58,7 @@ public:
 	float getCarry();
 	int getLiftMax();
 	int getLiftMaxMod();
-	int getProficiencyPoints();
+	int getSkillPoints();
 	int getSpeed();
 	int getSpeedMod();
 	int getDodge();
@@ -90,7 +90,7 @@ private:
 	//an increase costs one stat point up to the stat being 11
 	//from that point, an increase costs 2 for 12, 3 for 13, 4 for 14, and so on until it is 8 for 18
 	//stats are bounded between 3 and their potential multiplied by 18 rounded down at character creation
-	//stat point amount is determined by a roll of 6d6
+	//stat point amount is determined by a roll of 5d6
 
 	int strength;						//
 	int strengthMod;					//can be naturally modified by height/weight
@@ -121,16 +121,19 @@ private:
 
 	//character creation stats
 
-	int statPoints;						//stat points are used to modify character stats after they are rolled. set at a roll of 6d6
-	int proficiencyPoints;				//proficiency points are used to allocate proficiencies at the start of the game
+	int statPoints;						//stat points are used to modify character stats after they are rolled. set at a roll of 5d6
+	int skillPoints;					//skill points are used to allocate proficiencies at the start of the game
 
 	//race information
+
+	//these races are not balanced, nor should they be
+	//different players will regularly gravitate toward different races due to preference between advantages and disadvantages
 
 	//potential is a percentage multiplier regularly between 0 and 1.25
 	//this modifier is directly applied to its stat after it is rolled initialy
 	//these modifiers DO NOT affect stat point allocation in any way
 
-	//tendency is a number usually between -2 and 2
+	//tendency is a number usually between -3 and 3
 	//at 0, tendency does nothing
 	//at 1, tendency adds 1 extra 1d6 roll to that stat's roll and drops the lowest 1d6 roll
 	//at 2, tendency adds 2 extra 1d6 rolls and drops the lowest 2 1d6 rolls
@@ -138,25 +141,45 @@ private:
 	//at -2, tendency adds 2 extra 1d6 rolls and drops the highest 2 1d6 rolls
 
 	float strengthPotential;			//
-	int strengthTendency;				//elven tendency -1
+	int strengthTendency;				//elven tendency -1, kobold tendency -2, demon tendency 1
 	float dexterityPotential;			//
-	int dexterityTendency;				//elven tendency 2
+	int dexterityTendency;				//elven tendency 2, kobold tendency 2, demon tendency 1
 	float agilityPotential;				//
-	int agilityTendency;				//elven tendency 1
+	int agilityTendency;				//elven tendency 1, kobold tendency 2
 	float constitutionPotential;		//
-	int constitutionTendency;			//elven tendency -2
+	int constitutionTendency;			//elven tendency -2, kobold tendency -3, demon tendency 2
 	float intellectPotential;			//
-	int intellectTendency;				//
+	int intellectTendency;				//kobold tendency -1
 	float willpowerPotential;			//
-	int willpowerTendency;				//
+	int willpowerTendency;				//demon tendency 1
 	float perceptionPotential;			//
-	int perceptionTendency;				//elven tendency 2
+	int perceptionTendency;				//elven tendency 2, kobold tendency 1
 	float communicationPotential;		//
-	int communicationTendency;			//elven tendency -1
+	int communicationTendency;			//elven tendency -1, kobold tendency -2
 	float beautyPotential;				//
 	int beautyTendency;					//elven tendency 1
-	float statPointsBonus;				//bonus of stat points, for example humans have this number set at 6, while elves have it at -12
+	float statPointsBonus;				//bonus of stat points, 10 for humans, -5 for elves, 0 for kobolds, 0 for delphi, -5 for demons
+
+	float upperHeight;					//maximum standard height
+	float lowerHeight;					//minimum standard height
+	float bmiMultiplier;				//not sure how this would work yet
 	
+	//race descriptions
+
+	//humans : it's a human I mean come on
+
+	//elves : are terrible and should not be allowed to be in this ruleset
+
+	//kobolds : Kobolds are smaller folk with skin not quite scaly but not quite mammalian either. They tend to be less intelligent than other races, leading to kobold societies often being
+	//a degree less civilized than human, elven, and delphien societies. As well, kobolds have a tendency to shun other races due to this difference. Cut off from magical capabilities, kobolds
+	//are often martial experts by necessity.
+
+	//delphi : Delphi are a strange combination of human and sea mammal. They match up with humans in many ways, but are capable of swimming extremely quickly and can hold their breath for up
+	//to 10 minutes in some cases. However, delphi need more water than humans while on land, though they are better at filtering water than humans so have a wider selection of water to drink
+	//which includes sea water.
+
+	//demons : basically just people with horns because it's what's cool
+
 	//general dependant stats
 
 	int restrictMax;					//
@@ -203,7 +226,7 @@ private:
 	bool buildAgilityStats();			//builds jump, speed, move, and dodge
 	bool buildHeightMod();				//recompute height mod
 	bool buildWeightMod();				//recompute weight mod
-	bool buildProficiency();			//give starting proficiency points
+	bool buildSkill();					//give starting skill points
 	bool buildLift();					//lift setup
 
 	//defense stats
@@ -235,7 +258,23 @@ private:
 	int grapple;
 	int aim;		//the character's ability to aim with ranged weapons
 
-	//passive basic adventure skills
+	//skills
+
+	//create a generic class for all skills
+	
+	//factors for adventure skill rolls
+	//skill affects time it takes to make an action using that skill
+	//skill affects the capability to perform difficult actions using that skill
+	//skill affects the success of actions using that skill in a non-binary way
+		//a medium roll results in medium success, a high-ish roll results in high-ish success
+	
+	//skills go up only through training them
+	//you can technically just sit around and learn skills for a few years before doing anything in game, but money needs and campaign dangers will usually prevent this from happening
+	//skills go down without use, but the amount they go down more slowly with more time
+
+	//create skill groups: crafting, engineering, language, knowledge, combat, survival, agriculture, criminal, athletic, artistic, gathering, travel, magic, social, mathematics, and science
+	//skill trees for more complex skills such as crafting, engineering, knowledge, magic, mathematics, and science
+	//skill access/progression is only limited by the knowledge in the world and character capability, so a dark age campaign setting would make it difficult to learn higher maths and sciences
 
 	//training stats
 
@@ -279,8 +318,6 @@ private:
 	float trainingBeauty;				//trained through looking in a mirror and worrying about your looks
 	float trainingBeautyMin;			//a training minimum equal to half of the max achieved beauty training
 	std::stack<float> hoursBeauty;
-
-	//IMPLEMENT SKILL TREES FOR COMBAT AND ADVENTURE SKILLS
 
 	//CHARACTERS CAN CHOOSE WHAT TO LEARN EVERY NIGHT OR MORNING, THIS IS FOR TRAINING SKILLS
 	//SKILLS INCREASE AT THE SAME RATE WITH TRAINING
