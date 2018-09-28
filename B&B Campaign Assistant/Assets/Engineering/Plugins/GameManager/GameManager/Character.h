@@ -1,6 +1,6 @@
 #include <iostream>
 #include <stdlib.h>
-#include <stack>
+#include <deque>
 #include "Being.h"
 #include "Weapon.h"
 #include "Armor.h"
@@ -28,24 +28,20 @@ public:
 	void setYears(int y);				//
 	void setDays(int d);				//
 	void setSeconds(int s);				//
-	void setHeight(float h);			//
-	void setWeight(float w);			//
+	void setHeight(float h);			//we assume that height limits have been set in UI code
+	void setWeight(float w);			//we assume that bmi calculation has been done in UI code
 	
 	//runtime methods
 	bool buildCharacter();				//builds the character from all input information. if information needed is missing, returns false
 	
 	//get methods
 	std::string getName();
-	int getStrength();					//
-	int getDexterity();					//
-	int getAgility();					//
-	int getConstitution();				//
-	int getIntellect();					//
-	int getWillpower();					//
-	int getPerception();				//
-	int getCommunication();				//
-	int getBeauty();					//
+	float getStat(int stat, int type);	//get stat and type of stat (0 for stat, 1 for statMod, 2 for statPotential, 3 for statTendency)
 	std::string getAge();
+	float getLowerHeight();
+	float getUpperHeight();
+	float getBMILowStandard();
+	float getBMIHighStandard();
 
 	int getRestrictMax();
 	int getRestrictMaxMod();
@@ -80,6 +76,7 @@ public:
 	int getEyeglassesBonus();
 	int getEyeglassesBonusMod();
 	std::string getEyesight();
+	float getTraining(int stat, bool hours);
 private:
 	//base stats
 
@@ -92,32 +89,32 @@ private:
 	//stats are bounded between 3 and their potential multiplied by 18 rounded down at character creation
 	//stat point amount is determined by a roll of 5d6
 
-	int strength;						//
-	int strengthMod;					//can be naturally modified by height/weight
-	int dexterity;						//
+	int strength;						//strength affects lift amount, carry amount, crush damage, and to an extent modifies character weight
+	int strengthMod;					//
+	int dexterity;						//dexterity affects the character's capability for fine motor skills
 	int dexterityMod;					//
-	int agility;						//
+	int agility;						//agility affects a character's speed in performing physical actions
 	int agilityMod;						//
-	int constitution;					//
-	int constitutionMod;				//can be naturally modified by height/weight
-	int intellect;						//
+	int constitution;					//constitution affects the body's capability to deal with wounds, physical strain, and disease
+	int constitutionMod;				//
+	int intellect;						//intellect affects the mind's capability to solve problems and process complex information
 	int intellectMod;					//
-	int willpower;						//
+	int willpower;						//willpower affects the mind's capability to deal with pain, and mental strain. Affects memory. Affects magic inclination
 	int willpowerMod;					//
-	int perception;						//
+	int perception;						//perception affects a character's capability to notice things as well as a character's eyesight
 	int perceptionMod;					//
-	int communication;					//
+	int communication;					//communication affects a character's capability to communicate with others through speech and expression as well as understand others
 	int communicationMod;				//
-	int beauty;							//
+	int beauty;							//beauty affects a character's physical appearance, voice, and natural charisma
 	int beautyMod;						//
 
 	int years;							//age in earth years rounded down
 	int days;							//age in earth days rounded down
 	int seconds;						//age in earth seconds rounded down
-	float height;						//height as set by player
-	float heightMod;					//mod on height
-	float weight;						//weight as set by player
-	float weightMod;					//mod on weight
+	float height;						//height as set by player in inches, should use a slider limited by upperHeight and lowerHeight
+	float heightMod;					//mod on height, affected by probably nothing but I'm gonna leave this here anyway just in case
+	float weight;						//weight as set by player in pounds, should use a slider that is affected by height, this can go up or down depending on eating, exercise, illness, etc
+	float weightMod;					//mod on weight, affected by strength in tandem with height, and things being worn/carried
 
 	//character creation stats
 
@@ -139,6 +136,7 @@ private:
 	//at 2, tendency adds 2 extra 1d6 rolls and drops the lowest 2 1d6 rolls
 	//at -1, tendency adds 1 extra 1d6 roll and drops the highest 1d6 roll
 	//at -2, tendency adds 2 extra 1d6 rolls and drops the highest 2 1d6 rolls
+	//and so on
 
 	float strengthPotential;			//
 	int strengthTendency;				//elven tendency -1, kobold tendency -2, demon tendency 1
@@ -160,9 +158,10 @@ private:
 	int beautyTendency;					//elven tendency 1
 	float statPointsBonus;				//bonus of stat points, 10 for humans, -5 for elves, 0 for kobolds, 0 for delphi, -5 for demons
 
-	float upperHeight;					//maximum standard height
 	float lowerHeight;					//minimum standard height
-	float bmiMultiplier;				//not sure how this would work yet
+	float upperHeight;					//maximum standard height
+	float bmiLowStandard;				//the standard bmi low for this race, 18.5 for humans, 17 for elves, 15 for kobolds, 18 for delphi, 21 for demons
+	float bmiHighStandard;				//the standard bmi high for this race, 25 for humans, 23 for elves, 20 for kobolds, 24 for delphi, 28 for demons
 	
 	//race descriptions
 
@@ -296,28 +295,28 @@ private:
 	//so if in a day you trained 3 hours, but your requirement was 30 hours per month, then you would only receive two hours of training
 
 	float trainingStrength;				//trained through combat, travel, lifting, etc
-	std::stack<float> hoursStrength;	//hours of training over the past month
+	std::deque<float> hoursStrength;	//hours of training over the past month
 	float trainingDexterity;			//trained through combat, crafting, cooking, etc
-	std::stack<float> hoursDexterity;
+	std::deque<float> hoursDexterity;
 	float trainingAgility;				//trained through combat, sprinting, etc
-	std::stack<float> hoursAgility;
-	float trainingConstitution;			//trained through travel, eating, etc
-	std::stack<float> hoursConstitution;
+	std::deque<float> hoursAgility;
+	float trainingConstitution;			//trained through travel, eating, sleeping, etc
+	std::deque<float> hoursConstitution;
 	float trainingIntellect;			//trained through reading, travel, etc
 	float trainingIntellectMin;			//a training minimum equal to two-thirds of the max achieved intellect training
-	std::stack<float> hoursIntellect;
-	float trainingWillpower;			//trained through meditation and ???
+	std::deque<float> hoursIntellect;
+	float trainingWillpower;			//trained through meditation, memorization, and spell casting
 	float trainingWillpowerMin;			//a training minimum equal to half of the max achieved willpower training
-	std::stack<float> hoursWillpower;
+	std::deque<float> hoursWillpower;
 	float trainingPerception;			//trained through sensory deprivation training, so basically perception must usually be specifically trained
 	float trainingPerceptionMin;		//a training minimum equal to a quarter of the max achieved perception training
-	std::stack<float> hoursPerception;
+	std::deque<float> hoursPerception;
 	float trainingCommunication;		//trained through social interaction, reading, etc
 	float trainingCommunicationMin;		//a training minimum equal to half of the max achieved communication training
-	std::stack<float> hoursCommunication;
+	std::deque<float> hoursCommunication;
 	float trainingBeauty;				//trained through looking in a mirror and worrying about your looks
 	float trainingBeautyMin;			//a training minimum equal to half of the max achieved beauty training
-	std::stack<float> hoursBeauty;
+	std::deque<float> hoursBeauty;
 
 	//CHARACTERS CAN CHOOSE WHAT TO LEARN EVERY NIGHT OR MORNING, THIS IS FOR TRAINING SKILLS
 	//SKILLS INCREASE AT THE SAME RATE WITH TRAINING

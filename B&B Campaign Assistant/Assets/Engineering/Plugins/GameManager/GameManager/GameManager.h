@@ -47,15 +47,7 @@ extern "C"
 	//exported character get methods
 	DllExport int getIndex(char *name);
 	DllExport char *getName(int index);
-	DllExport int getStrength(int index);
-	DllExport int getDexterity(int index);
-	DllExport int getAgility(int index);
-	DllExport int getConstitution(int index);
-	DllExport int getIntellect(int index);
-	DllExport int getWillpower(int index);
-	DllExport int getPerception(int index);
-	DllExport int getCharisma(int index);
-	DllExport int getBeauty(int index);
+	DllExport float getStat(int index, int stat, int type);
 	DllExport char *getAge(int index);
 
 	DllExport int getRestrictMax(int index);

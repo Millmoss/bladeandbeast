@@ -40,6 +40,7 @@ Character::Character() : Being()
 	carry = 0;
 	liftMax = -1;
 	liftMaxMod = 0;
+	statPoints = 0;
 	skillPoints = -1;
 	speed = -1;
 	speedMod = 0;
@@ -60,6 +61,52 @@ Character::Character() : Being()
 	eyeglassesBonus = -1;
 	eyeglassesBonusMod = 0;
 	eyesight = "Unknown";
+	trainingStrength = 0;
+	hoursStrength = std::deque<float>();
+	trainingDexterity = 0;
+	hoursDexterity = std::deque<float>();
+	trainingAgility = 0;
+	hoursAgility = std::deque<float>();
+	trainingConstitution = 0;
+	hoursConstitution = std::deque<float>();
+	trainingIntellect = 0;
+	trainingIntellectMin = 0;
+	hoursIntellect = std::deque<float>();
+	trainingWillpower = 0;
+	trainingWillpowerMin = 0;
+	hoursWillpower = std::deque<float>();
+	trainingPerception = 0;
+	trainingPerceptionMin = 0;
+	hoursPerception = std::deque<float>();
+	trainingCommunication = 0;
+	trainingCommunicationMin = 0;
+	hoursCommunication = std::deque<float>();
+	trainingBeauty = 0;
+	trainingBeautyMin = 0;
+	hoursBeauty = std::deque<float>();
+	strengthPotential = 0;
+	strengthTendency = 0;
+	dexterityPotential = 0;
+	dexterityTendency = 0;
+	agilityPotential = 0;
+	agilityTendency = 0;
+	constitutionPotential = 0;
+	constitutionTendency = 0;
+	intellectPotential = 0;
+	intellectTendency = 0;
+	willpowerPotential = 0;
+	willpowerTendency = 0;
+	perceptionPotential = 0;
+	perceptionTendency = 0;
+	communicationPotential = 0;
+	communicationTendency = 0;
+	beautyPotential = 0;
+	beautyTendency = 0;
+	statPointsBonus = 0;
+	upperHeight = 0;
+	lowerHeight = 0;
+	bmiLowStandard = 0;
+	bmiHighStandard = 0;
 }
 
 Character::~Character()
@@ -70,7 +117,7 @@ Character::~Character()
 void Character::setStrength(int s) { strength = s; restrictMax = s; }
 void Character::setDexterity(int d) { dexterity = d; }
 void Character::setAgility(int a) { agility = a; }
-void Character::setConstitution(int c) { constitution = c; float h = health; healthMax = c; health = h; overheatMax = c; healRate = ((float)c) / 10; }
+void Character::setConstitution(int c) { constitution = c; float h = healthMax; healthMax = c; health += healthMax - h; overheatMax = c; healRate = ((float)c) / 10; }
 void Character::setIntellect(int i) { intellect = i; }
 void Character::setWillpower(int w) { willpower = w; resolve = w; }
 void Character::setPerception(int p) { perception = p; }
@@ -79,8 +126,8 @@ void Character::setBeauty(int b) { beauty = b; }
 void Character::setYears(int y) { years = y; }
 void Character::setDays(int d) { days = d; }
 void Character::setSeconds(int s) { seconds = s; }
-void Character::setHeight(float h) { height = h; heightMod = h; }
-void Character::setWeight(float w) { weight = w; weightMod = w; }
+void Character::setHeight(float h) { height = h; }
+void Character::setWeight(float w) { weight = w; }
 
 bool Character::buildCharacter()
 {
@@ -208,17 +255,116 @@ bool Character::buildAgilityStats()
 	return true;
 }
 
+bool Character::buildWeightMod()
+{
+
+}
+
 std::string Character::getName() { return name; }
-int Character::getStrength() { return strength; }
-int Character::getDexterity() { return dexterity; }
-int Character::getAgility() { return agility; }
-int Character::getConstitution() { return constitution; }
-int Character::getIntellect() { return intellect; }
-int Character::getWillpower() { return willpower; }
-int Character::getPerception() { return perception; }
-int Character::getCommunication() { return communication; }
-int Character::getBeauty() { return beauty; }
+float Character::getStat(int stat, int type)
+{ 
+	switch (stat)
+	{
+	case 0:
+		if (type == 0)
+			return strength;
+		if (type == 1)
+			return strengthMod;
+		if (type == 2)
+			return strengthPotential;
+		if (type == 3)
+			return strengthTendency;
+		break;
+	case 1:
+		if (type == 0)
+			return dexterity;
+		if (type == 1)
+			return dexterityMod;
+		if (type == 2)
+			return dexterityPotential;
+		if (type == 3)
+			return dexterityTendency;
+		break;
+	case 2:
+		if (type == 0)
+			return agility;
+		if (type == 1)
+			return agilityMod;
+		if (type == 2)
+			return agilityPotential;
+		if (type == 3)
+			return agilityTendency;
+		break;
+	case 3:
+		if (type == 0)
+			return constitution;
+		if (type == 1)
+			return constitutionMod;
+		if (type == 2)
+			return constitutionPotential;
+		if (type == 3)
+			return constitutionTendency;
+		break;
+	case 4:
+		if (type == 0)
+			return intellect;
+		if (type == 1)
+			return intellectMod;
+		if (type == 2)
+			return intellectPotential;
+		if (type == 3)
+			return intellectTendency;
+		break;
+	case 5:
+		if (type == 0)
+			return willpower;
+		if (type == 1)
+			return willpowerMod;
+		if (type == 2)
+			return willpowerPotential;
+		if (type == 3)
+			return willpowerTendency;
+		break;
+	case 6:
+		if (type == 0)
+			return perception;
+		if (type == 1)
+			return perceptionMod;
+		if (type == 2)
+			return perceptionPotential;
+		if (type == 3)
+			return perceptionTendency;
+		break;
+	case 7:
+		if (type == 0)
+			return communication;
+		if (type == 1)
+			return communicationMod;
+		if (type == 2)
+			return communicationPotential;
+		if (type == 3)
+			return communicationTendency;
+		break;
+	case 8:
+		if (type == 0)
+			return beauty;
+		if (type == 1)
+			return beautyMod;
+		if (type == 2)
+			return beautyPotential;
+		if (type == 3)
+			return beautyTendency;
+		break;
+	default:
+		break;
+	}
+	return 0;
+}
 std::string Character::getAge() { std::string r = "WOAH"; return r; }
+float Character::getLowerHeight() { return lowerHeight; }
+float Character::getUpperHeight() { return upperHeight; }
+float Character::getBMILowStandard() { return bmiLowStandard; }
+float Character::getBMIHighStandard() { return bmiHighStandard; }
 
 int Character::getRestrictMax() { return restrictMax; }
 int Character::getRestrictMaxMod() { return restrictMaxMod; }
@@ -253,3 +399,103 @@ int Character::getSorceryBonusMod() { return sorceryBonusMod; }
 int Character::getEyeglassesBonus() { return eyeglassesBonus; }
 int Character::getEyeglassesBonusMod() { return eyeglassesBonusMod; }
 std::string Character::getEyesight() { return eyesight; }
+
+float Character::getTraining(int stat, bool hours)
+{
+	switch (stat)
+	{
+	case 0:
+		if (hours)
+		{
+			float h = 0;
+			for (int i = 0; i < hoursStrength.size(); i++)
+				h += hoursStrength[i];
+			return h;
+		}
+		return trainingStrength;
+		break;
+	case 1:
+		if (hours)
+		{
+			float h = 0;
+			for (int i = 0; i < hoursDexterity.size(); i++)
+				h += hoursDexterity[i];
+			return h;
+		}
+		return trainingDexterity;
+		break;
+	case 2:
+		if (hours)
+		{
+			float h = 0;
+			for (int i = 0; i < hoursAgility.size(); i++)
+				h += hoursAgility[i];
+			return h;
+		}
+		return trainingAgility;
+		break;
+	case 3:
+		if (hours)
+		{
+			float h = 0;
+			for (int i = 0; i < hoursConstitution.size(); i++)
+				h += hoursConstitution[i];
+			return h;
+		}
+		return trainingConstitution;
+		break;
+	case 4:
+		if (hours)
+		{
+			float h = 0;
+			for (int i = 0; i < hoursIntellect.size(); i++)
+				h += hoursIntellect[i];
+			return h;
+		}
+		return trainingIntellect;
+		break;
+	case 5:
+		if (hours)
+		{
+			float h = 0;
+			for (int i = 0; i < hoursWillpower.size(); i++)
+				h += hoursWillpower[i];
+			return h;
+		}
+		return trainingWillpower;
+		break;
+	case 6:
+		if (hours)
+		{
+			float h = 0;
+			for (int i = 0; i < hoursPerception.size(); i++)
+				h += hoursPerception[i];
+			return h;
+		}
+		return trainingPerception;
+		break;
+	case 7:
+		if (hours)
+		{
+			float h = 0;
+			for (int i = 0; i < hoursCommunication.size(); i++)
+				h += hoursCommunication[i];
+			return h;
+		}
+		return trainingCommunication;
+		break;
+	case 8:
+		if (hours)
+		{
+			float h = 0;
+			for (int i = 0; i < hoursBeauty.size(); i++)
+				h += hoursBeauty[i];
+			return h;
+		}
+		return trainingBeauty;
+		break;
+	default:
+		break;
+	}
+	return 0;
+}
