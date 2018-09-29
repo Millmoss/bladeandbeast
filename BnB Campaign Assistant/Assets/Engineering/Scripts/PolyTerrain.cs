@@ -46,6 +46,17 @@ public class PolyTerrain : MonoBehaviour
 				polyTerrainMesh.AddComponent<MeshRenderer>();
 				polyTerrainMesh.GetComponent<MeshRenderer>().material = Instantiate<Material>(terrainmat);
 				polyTerrainMeshSet[z, x] = polyTerrain(x * polysize, z * polysize, polyTerrainMesh);
+				polyTerrainMeshSet[z, x].GetComponent<MeshRenderer>().material.mainTexture.wrapMode = TextureWrapMode.Clamp;
+			}
+		}
+
+		//it's not normals???
+
+		for (int z = 0; z < polyscale; z++)
+		{
+			for (int x = 0; x < polyscale; x++)
+			{
+				terrainNormalsSet[z, x] = Vector3.zero;
 			}
 		}
 
@@ -54,97 +65,49 @@ public class PolyTerrain : MonoBehaviour
 			for (int x = 0; x < meshArrayWidth; x++)
 			{
 				Vector3[] normals = polyTerrainMeshSet[z, x].GetComponent<MeshFilter>().mesh.normals;
-				Vector3[] normalsDown = null;
-				if (z != 0)
-					normalsDown = polyTerrainMeshSet[z - 1, x].GetComponent<MeshFilter>().mesh.normals;
-				Vector3[] normalsUp = null;
-				if (z != meshArrayWidth - 1)
-					normalsUp = polyTerrainMeshSet[z + 1, x].GetComponent<MeshFilter>().mesh.normals;
-				Vector3[] normalsLeft = null;
-				if (x != 0)
-					normalsLeft = polyTerrainMeshSet[z, x - 1].GetComponent<MeshFilter>().mesh.normals;
-				Vector3[] normalsRight = null;
-				if (x != meshArrayWidth - 1)
-					normalsRight = polyTerrainMeshSet[z, x + 1].GetComponent<MeshFilter>().mesh.normals;
-				for (int meshz = 0; meshz <= polysize; meshz++)
+				int xStart = x * polysize;
+				int zStart = z * polysize;
+				int xEnd = xStart + polysize + 1;
+				int zEnd = zStart + polysize + 1;
+				if (xEnd >= polyscale)
+					xEnd = polyscale;
+				if (zEnd >= polyscale)
+					zEnd = polyscale;
+				int xPoly = xEnd - xStart;
+				int zPoly = zEnd - zStart;
+				for (int meshz = 0; meshz < zPoly; meshz++)
 				{
-					for (int meshx = 0; meshx <= polysize; meshx++)
+					for (int meshx = 0; meshx < xPoly; meshx++)
 					{
-						if (meshx == 0 && x != 0)
-						{
-							if (meshz == 0 && z != 0)
-							{
+						terrainNormalsSet[zStart + meshz, xStart + meshx] += normals[meshz * xPoly + meshx];
+					}
+				}
+			}
+		}
 
-							}
-							else if (meshz == polysize && z != meshArrayWidth - 1)
-							{
-
-							}
-							else
-							{
-
-							}
-						}
-						else if (meshx == polysize && x != meshArrayWidth - 1)
-						{
-							if (meshz == 0 && z != 0)
-							{
-
-							}
-							else if (meshz == polysize && z != meshArrayWidth - 1)
-							{
-
-							}
-							else
-							{
-
-							}
-						}
-						else if (meshz == 0 && z != 0)
-						{
-							if (meshx == 0 && x != 0)
-							{
-
-							}
-							else if (meshx == polysize && x != meshArrayWidth - 1)
-							{
-
-							}
-							else
-							{
-
-							}
-						}
-						else if (meshz == polysize && z != meshArrayWidth - 1)
-						{
-							if (meshx == 0 && x != 0)
-							{
-
-							}
-							else if (meshx == polysize && x != meshArrayWidth - 1)
-							{
-
-							}
-							else
-							{
-
-							}
-						}
-						else
-						{
-
-						}
+		for (int z = 0; z < meshArrayWidth; z++)
+		{
+			for (int x = 0; x < meshArrayWidth; x++)
+			{
+				Vector3[] normals = polyTerrainMeshSet[z, x].GetComponent<MeshFilter>().mesh.normals;
+				int xStart = x * polysize;
+				int zStart = z * polysize;
+				int xEnd = xStart + polysize + 1;
+				int zEnd = zStart + polysize + 1;
+				if (xEnd >= polyscale)
+					xEnd = polyscale;
+				if (zEnd >= polyscale)
+					zEnd = polyscale;
+				int xPoly = xEnd - xStart;
+				int zPoly = zEnd - zStart;
+				for (int meshz = 0; meshz < zPoly; meshz++)
+				{
+					for (int meshx = 0; meshx < xPoly; meshx++)
+					{
+						normals[meshz * xPoly + meshx] = terrainNormalsSet[zStart + meshz, xStart + meshx];
 					}
 				}
 				polyTerrainMeshSet[z, x].GetComponent<MeshFilter>().mesh.normals = normals;
-				if (z != 0)
-					polyTerrainMeshSet[z - 1, x].GetComponent<MeshFilter>().mesh.normals = normalsDown;
-				if (z != meshArrayWidth - 1)
-					polyTerrainMeshSet[z + 1, x].GetComponent<MeshFilter>().mesh.normals = normalsUp;
-				if (x != 0)
-					polyTerrainMeshSet[z, x - 1].GetComponent<MeshFilter>().mesh.normals = normalsLeft;
-				if (x != meshArrayWidth - 1)
-					polyTerrainMeshSet[z, x + 1].GetComponent<MeshFilter>().mesh.normals = normalsRight;
 			}
 		}
 	}
