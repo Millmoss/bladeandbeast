@@ -158,6 +158,8 @@ public class PolyTerrain : MonoBehaviour
 
 	void calcNormals()
 	{
+		//this loop pair can be optimized
+		//normalize all normals in terrainNormalsSet so they're not recalculated every call to getSlope
 		for (int z = 0; z < polyscale; z++)
 		{
 			for (int x = 0; x < polyscale; x++)
@@ -183,13 +185,10 @@ public class PolyTerrain : MonoBehaviour
 				int zPoly = zEnd - zStart;
 				for (int meshz = 0; meshz < zPoly; meshz++)
 				{
-					terrainNormalsSet[zStart + meshz, xStart + 0] += normals[meshz * xPoly + 0];
-					terrainNormalsSet[zStart + meshz, xStart + xPoly - 1] += normals[meshz * xPoly + xPoly - 1];
-				}
-				for (int meshx = 0; meshx < xPoly; meshx++)
-				{
-					terrainNormalsSet[zStart + 0, xStart + meshx] += normals[0 * xPoly + meshx];
-					terrainNormalsSet[zStart + zPoly - 1, xStart + meshx] += normals[(zPoly - 1) * xPoly + meshx];
+					for (int meshx = 0; meshx < xPoly; meshx++)
+					{
+						terrainNormalsSet[zStart + meshz, xStart + meshx] += normals[meshz * xPoly + meshx];
+					}
 				}
 			}
 		}
@@ -222,5 +221,28 @@ public class PolyTerrain : MonoBehaviour
 				polyTerrainMeshSet[z, x].GetComponent<MeshFilter>().mesh.normals = normals;
 			}
 		}
+	}
+
+	public float getHeight(float x, float z)
+	{
+		x /= sizescale;
+		z /= sizescale;
+		return Mathf.PerlinNoise(x * perlinscale + perlinoffset, z * perlinscale + perlinoffset) * heightscale;
+	}
+
+	public Vector3 getNormalForce(float x, float z)
+	{
+		if (x >= 0 && z >= 0 && x <= (polyscale - 1) * sizescale && z <= (polyscale - 1) * sizescale)
+		{
+			int xFloor = Mathf.FloorToInt(x / sizescale);
+			int zFloor = Mathf.FloorToInt(z / sizescale);
+			int xCeil = Mathf.CeilToInt(x / sizescale);
+			int zCeil = Mathf.CeilToInt(z / sizescale);
+			Vector3 normalAvg = terrainNormalsSet[zFloor, xFloor].normalized + terrainNormalsSet[zFloor, xCeil].normalized + terrainNormalsSet[zCeil, xFloor].normalized + terrainNormalsSet[zCeil, xCeil].normalized;
+			print(normalAvg);
+			normalAvg = normalAvg.normalized;
+			return normalAvg;
+		}
+		return Vector3.up;
 	}
 }
