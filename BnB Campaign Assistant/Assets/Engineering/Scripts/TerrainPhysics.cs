@@ -24,7 +24,7 @@ public class TerrainPhysics : MonoBehaviour
 	
 	void Update ()
 	{
-		if (onGround)
+		/*if (onGround)
 		{
 			xVelocity = Mathf.Lerp(xVelocity, 0, friction * Time.deltaTime * tempFric);
 			zVelocity = Mathf.Lerp(zVelocity, 0, friction * Time.deltaTime * tempFric);
@@ -63,6 +63,8 @@ public class TerrainPhysics : MonoBehaviour
 		else if (transform.position.y > groundHeight + .05f)
 		{
 			onGround = false;
-		}
+		}*/
+		float groundHeight = terrain.getHeight(transform.position.x, transform.position.z);
+		transform.position = new Vector3(transform.position.x, groundHeight, transform.position.z);
 	}
 }

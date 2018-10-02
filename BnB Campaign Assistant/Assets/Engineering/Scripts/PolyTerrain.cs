@@ -16,7 +16,7 @@ public class PolyTerrain : MonoBehaviour
 	public float deformamount = .1f;
 	public int deformseed = 15;
 	private Vector3[,] areaMap;
-	private Vector3[,] terrainVerticesSet;
+	private Vector3[] terrainVerticesSet;
 	private Vector3[,] terrainNormalsSet;
 	private GameObject[,] polyTerrainMeshSet;
 	private int meshArrayWidth;
@@ -26,7 +26,7 @@ public class PolyTerrain : MonoBehaviour
 	{
 		meshArrayWidth = Mathf.CeilToInt(polyscale / (float)(polysize + 1));
 		polyTerrainMeshSet = new GameObject[meshArrayWidth, meshArrayWidth];
-		terrainVerticesSet = new Vector3[polyscale, polyscale];
+		terrainVerticesSet = new Vector3[polyscale * polyscale + (polyscale - 1) * (polyscale - 1)];
 		terrainNormalsSet = new Vector3[polyscale, polyscale];
 		areaMap = new Vector3[polyscale, polyscale];
 		for (int z = 0; z < polyscale; z++)
@@ -76,6 +76,7 @@ public class PolyTerrain : MonoBehaviour
 			for (int x = 0; x < xPoly; x++)
 			{
 				terrainVertices[z * xPoly + x] = areaMap[x + xStart, z + zStart];
+				terrainVerticesSet[z * xPoly + x] = terrainVertices[z * xPoly + x];
 			}
 		}
 
@@ -85,6 +86,7 @@ public class PolyTerrain : MonoBehaviour
 			{
 				float y = (areaMap[x + xStart, z + zStart].y + areaMap[x + 1 + xStart, z + zStart].y + areaMap[x + xStart, z + 1 + zStart].y + areaMap[x + 1 + xStart, z + 1 + zStart].y) / 4;
 				terrainVertices[xPoly * zPoly + ((xPoly - 1) * z) + x] = new Vector3(areaMap[x + xStart, z + zStart].x + .5f * sizescale, y, areaMap[x + xStart, z + zStart].z + .5f * sizescale);
+				terrainVerticesSet[xPoly * zPoly + ((xPoly - 1) * z) + x] = terrainVertices[xPoly * zPoly + ((xPoly - 1) * z) + x];
 			}
 		}
 
@@ -223,25 +225,111 @@ public class PolyTerrain : MonoBehaviour
 		}
 	}
 
-	public float getHeight(float x, float z)
+	public int[] triPoints(float xcoord, float zcoord)		//returns the three points of the triangle x and z sit within
+	{														//the order unfortunately does matter, the fourth index is 0 for x long, 1 for z long
+		float x = xcoord % 1;
+		float z = zcoord % 1;
+		int[] rPoints = new int[4];
+		if (x + z < 1 && x > z)
+		{
+			rPoints[0] = Mathf.FloorToInt(zcoord) * polyscale + Mathf.FloorToInt(xcoord);
+			rPoints[1] = Mathf.FloorToInt(zcoord) * polyscale + Mathf.FloorToInt(xcoord) + 1;
+			rPoints[2] = polyscale * polyscale + Mathf.FloorToInt(zcoord) * polyscale + Mathf.FloorToInt(xcoord);
+			rPoints[3] = 0;
+		}
+		else if (x + z > 1 && x > z)
+		{
+			rPoints[0] = Mathf.FloorToInt(zcoord) * polyscale + Mathf.FloorToInt(xcoord) + 1;
+			rPoints[1] = (Mathf.FloorToInt(zcoord) + 1) * polyscale + Mathf.FloorToInt(xcoord) + 1;
+			rPoints[2] = polyscale * polyscale + Mathf.FloorToInt(zcoord) * polyscale + Mathf.FloorToInt(xcoord);
+			rPoints[3] = 1;
+		}
+		else if (x + z > 1 && x < z)
+		{
+			rPoints[0] = (Mathf.FloorToInt(zcoord) + 1) * polyscale + Mathf.FloorToInt(xcoord) + 1;
+			rPoints[1] = (Mathf.FloorToInt(zcoord) + 1) * polyscale + Mathf.FloorToInt(xcoord);
+			rPoints[2] = polyscale * polyscale + Mathf.FloorToInt(zcoord) * polyscale + Mathf.FloorToInt(xcoord);
+			rPoints[3] = 0;
+		}
+		else if (x + z < 1 && x < z)
+		{
+			rPoints[0] = (Mathf.FloorToInt(zcoord) + 1) * polyscale + Mathf.FloorToInt(xcoord);
+			rPoints[1] = Mathf.FloorToInt(zcoord) * polyscale + Mathf.FloorToInt(xcoord);
+			rPoints[2] = polyscale * polyscale + Mathf.FloorToInt(zcoord) * polyscale + Mathf.FloorToInt(xcoord);
+			rPoints[3] = 1;
+		}
+		else
+		{
+			rPoints[0] = polyscale * polyscale + Mathf.FloorToInt(zcoord) * polyscale + Mathf.FloorToInt(xcoord);
+			rPoints[1] = rPoints[0];
+			rPoints[2] = rPoints[0];
+			rPoints[3] = 2;
+		}
+		return rPoints;
+	}
+
+	public float getHeight(float x, float z)	//gets the terrain height at x and z
 	{
 		x /= sizescale;
 		z /= sizescale;
-		return Mathf.PerlinNoise(x * perlinscale + perlinoffset, z * perlinscale + perlinoffset) * heightscale;
+		int[] tri = triPoints(x, z);
+		float longY = 0;
+		float shortY = terrainVerticesSet[tri[2]].y;
+		if (tri[3] == 0)
+		{
+			if (tri[0] < tri[1])
+			{
+				longY = terrainVerticesSet[tri[1]].y * x % 1 + terrainVerticesSet[tri[0]].y * (1 - x % 1);
+			}
+			else
+			{
+				longY = terrainVerticesSet[tri[0]].y * x % 1 + terrainVerticesSet[tri[1]].y * (1 - x % 1);
+			}
+			if (z % 1 <= .5f)
+			{
+				longY *= 1 - z % 1;
+				shortY *= z % 1;
+			}
+			else
+			{
+				longY *= z % 1;
+				shortY *= 1 - z % 1;
+			}
+		}
+		else if (tri[3] == 1)
+		{
+			if (tri[0] < tri[1])
+			{
+				longY = terrainVerticesSet[tri[1]].y * z % 1 + terrainVerticesSet[tri[0]].y * (1 - z % 1);
+			}
+			else
+			{
+				longY = terrainVerticesSet[tri[0]].y * z % 1 + terrainVerticesSet[tri[1]].y * (1 - z % 1);
+			}
+			if (x % 1 <= .5f)
+			{
+				longY *= 1 - x % 1;
+				shortY *= x % 1;
+			}
+			else
+			{
+				longY *= x % 1;
+				shortY *= 1 - x % 1;
+			}
+		}
+
+		return shortY + longY;
+		//bad but reliable solution for now
+		//return Mathf.PerlinNoise(x * perlinscale + perlinoffset, z * perlinscale + perlinoffset) * heightscale;
 	}
 
 	public Vector3 getNormalForce(float x, float z)
 	{
 		if (x >= 0 && z >= 0 && x <= (polyscale - 1) * sizescale && z <= (polyscale - 1) * sizescale)
 		{
-			int xFloor = Mathf.FloorToInt(x / sizescale);
-			int zFloor = Mathf.FloorToInt(z / sizescale);
-			int xCeil = Mathf.CeilToInt(x / sizescale);
-			int zCeil = Mathf.CeilToInt(z / sizescale);
-			Vector3 normalAvg = terrainNormalsSet[zFloor, xFloor].normalized + terrainNormalsSet[zFloor, xCeil].normalized + terrainNormalsSet[zCeil, xFloor].normalized + terrainNormalsSet[zCeil, xCeil].normalized;
-			print(normalAvg);
-			normalAvg = normalAvg.normalized;
-			return normalAvg;
+			int[] tri = triPoints(x, z);
+			Vector3 n = Vector3.Cross(terrainVerticesSet[tri[0]] - terrainVerticesSet[tri[1]], terrainVerticesSet[tri[1]] - terrainVerticesSet[tri[2]]);
+			return n;
 		}
 		return Vector3.up;
 	}
