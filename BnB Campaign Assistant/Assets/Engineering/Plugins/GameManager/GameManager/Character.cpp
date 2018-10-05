@@ -160,36 +160,6 @@ bool Character::buildCharacter()
 	return totalSuccess;
 }
 
-bool Character::buildCarry()
-{
-	//combat load sources
-	//https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/455089/20150820-FOI06779_The_Soldiers_Load.pdf
-	//https://www.globalsecurity.org/military/library/report/call/call_01-15_ch11.htm
-	switch (strength)
-	{//FIX THIS
-		case 1: carryMax = 5; liftMax = 20; break;
-		case 2: carryMax = 10; liftMax = 30; break;
-		case 3: carryMax = 20; liftMax = 50; break;
-		case 4: carryMax = 30; liftMax = 70; break;
-		case 5: carryMax = 30; liftMax = 80; break;
-		case 6: carryMax = 30; liftMax = 90; break;
-		case 7: carryMax = 35; liftMax = 100; break;
-		case 8:  carryMax = 35; liftMax = 110; break;
-		case 9: carryMax = 40; liftMax = 120; break;
-		case 10: carryMax = 45; liftMax = 140; break;
-		case 11: carryMax = 45; liftMax = 160; break;
-		case 12: carryMax = 50; liftMax = 200; break;
-		case 13: carryMax = 55; liftMax = 250; break;
-		case 14: carryMax = 60; liftMax = 320; break;
-		case 15: carryMax = 70; liftMax = 400; break;
-		case 16: carryMax = 90; liftMax = 500; break;
-		case 17: carryMax = 120; liftMax = 620; break;
-		case 18: carryMax = 150; liftMax = 750; break;
-		default: return false;
-	}
-	return true;
-}
-
 bool Character::buildEyesight()
 {
 	switch (perception)
@@ -257,6 +227,17 @@ bool Character::buildAgilityStats()
 
 bool Character::buildWeightMod()
 {
+	bool success = true;
+	weightMod = 0;
+	if (strength != 0 && bmiHighStandard != 0 && bmiLowStandard != 0 && height != 0)
+		weightMod += ((float)(strength + strengthMod) / (float)250) * (bmiHighStandard + bmiLowStandard) / (2 * 703) * height;
+}
+
+bool Character::buildEquipLoad()
+{
+	//combat load sources
+	//https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/455089/20150820-FOI06779_The_Soldiers_Load.pdf
+	//https://www.globalsecurity.org/military/library/report/call/call_01-15_ch11.htm
 
 }
 
@@ -372,11 +353,10 @@ int Character::getRestrict() { return restrict; }
 int Character::getOverheatMax() { return overheatMax; }
 int Character::getOverheatMaxMod() { return overheatMaxMod; }
 int Character::getOverheat() { return overheat; }
-int Character::getCarryMax() { return carryMax; }
-int Character::getCarryMaxMod() { return carryMaxMod; }
-float Character::getCarry() { return carry; }
-int Character::getLiftMax() { return liftMax; }
-int Character::getLiftMaxMod() { return liftMaxMod; }
+int Character::getEquipLoadMax() { return equipLoadMax; }
+int Character::getEquipLoadMod() { return equipLoadMaxMod; }
+float Character::getEquipLoad() { return equipLoad; }
+int Character::getLiftMax() { return 0; }
 int Character::getSkillPoints() { return skillPoints; }
 int Character::getSpeed() { return speed; }
 int Character::getSpeedMod() { return speedMod; }

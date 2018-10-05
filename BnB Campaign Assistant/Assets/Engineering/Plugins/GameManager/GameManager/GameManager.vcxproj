@@ -151,7 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Armor.cpp" />
+    <ClCompile Include="Wearable.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="DataManager.cpp" />
     <ClCompile Include="Being.cpp" />
@@ -161,7 +161,7 @@
     <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Armor.h" />
+    <ClInclude Include="Wearable.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="DataManager.h" />
     <ClInclude Include="Being.h" />

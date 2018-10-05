@@ -3,7 +3,7 @@
 #include <deque>
 #include "Being.h"
 #include "Weapon.h"
-#include "Armor.h"
+#include "Wearable.h"
 
 #ifndef __CHARACTER_H_INCLUDED__
 #define __CHARACTER_H_INCLUDED__
@@ -153,7 +153,7 @@ private:
 	float perceptionPotential;			//
 	int perceptionTendency;				//elven tendency 2, kobold tendency 1
 	float communicationPotential;		//
-	int communicationTendency;			//elven tendency -1, kobold tendency -2
+	int communicationTendency;			//elven tendency -1, kobold tendency -2, demon tendency -3
 	float beautyPotential;				//
 	int beautyTendency;					//elven tendency 1
 	float statPointsBonus;				//bonus of stat points, 10 for humans, -5 for elves, 0 for kobolds, 0 for delphi, -5 for demons
@@ -189,14 +189,9 @@ private:
 	int overheatMaxMod;					//
 	int overheat;						//
 
-	int carryMax;						//carryable weight
-	int carryMaxMod;					//mod on carryable weight
-	float carry;						//weight carried
-
-	bool buildCarry();					//carry setup
-
-	int liftMax;						//lift weight
-	int liftMaxMod;						//mod on lift weight
+	int equipLoadMax;					//carryable weight
+	int equipLoadMaxMod;				//mod on carryable weight
+	float equipLoad;					//weight carried
 
 	int speed;							//base speed
 	int speedMod;						//mod on speed
@@ -204,13 +199,21 @@ private:
 	int healthMax;						//max health
 	int healthMaxMod;					//mod on max health
 
-	int dodge;							//base dodge capability
-	int dodgeMod;						//mod on dodge capability
-
 	float health;						//health
 	float healthMod;					//mod on health, ignores healthMax
 	float healRate;						//speed of healing
 	float healRateMod;					//mod on speed of healing
+
+	int energyMax;						//max energy
+	int energyMaxMod;					//mod on max energy
+
+	float energy;						//energy, the amount of energy or stamina a character has, reduces
+	float energyMod;					//mod on energy, ignores energyMax
+	float restRate;						//speed of energy return
+	float restRateMod;					//mod on rest rate
+
+	int dodge;							//base dodge capability
+	int dodgeMod;						//mod on dodge capability
 
 	int resolve;						//
 	int resolveMod;						//mod on resolve
@@ -225,6 +228,7 @@ private:
 	bool buildAgilityStats();			//builds jump, speed, move, and dodge
 	bool buildHeightMod();				//recompute height mod
 	bool buildWeightMod();				//recompute weight mod
+	bool buildEquipLoad();				//compute equip load
 	bool buildSkill();					//give starting skill points
 	bool buildLift();					//lift setup
 
@@ -238,7 +242,7 @@ private:
 	//other damage types can be added, but input files will have to be edited to account for that damage type
 
 	std::unordered_map<std::string, int *> defense;
-	std::unordered_map<std::string, Armor *> armors;
+	std::unordered_map<std::string, Wearable *> worn;
 
 	//passive basic combat skills
 

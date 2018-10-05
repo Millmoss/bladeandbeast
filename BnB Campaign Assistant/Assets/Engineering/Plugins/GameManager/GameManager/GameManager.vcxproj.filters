@@ -30,13 +30,13 @@
     <ClCompile Include="Item.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Armor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DataManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Being.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Wearable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -56,13 +56,13 @@
     <ClInclude Include="GameManager.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Armor.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="DataManager.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Being.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Wearable.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
