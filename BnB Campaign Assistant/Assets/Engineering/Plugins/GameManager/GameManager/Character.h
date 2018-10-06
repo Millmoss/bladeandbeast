@@ -49,9 +49,9 @@ public:
 	int getOverheatMax();
 	int getOverheatMaxMod();
 	int getOverheat();
-	int getCarryMax();
-	int getCarryMaxMod();
-	float getCarry();
+	int getEquipLoadMax();
+	int getEquipLoadMod();
+	float getEquipLoad();
 	int getLiftMax();
 	int getLiftMaxMod();
 	int getSkillPoints();
@@ -189,9 +189,9 @@ private:
 	int overheatMaxMod;					//
 	int overheat;						//
 
-	int equipLoadMax;					//carryable weight
+	int equipLoadMax;					//weight that can be carried without being unable to move
 	int equipLoadMaxMod;				//mod on carryable weight
-	float equipLoad;					//weight carried
+	float equipLoad;					//weight that can be carried without any penalty (note: backpacks will inflict move penalty either way)
 
 	int speed;							//base speed
 	int speedMod;						//mod on speed
@@ -204,13 +204,17 @@ private:
 	float healRate;						//speed of healing
 	float healRateMod;					//mod on speed of healing
 
-	int energyMax;						//max energy
-	int energyMaxMod;					//mod on max energy
-
-	float energy;						//energy, the amount of energy or stamina a character has, reduces
-	float energyMod;					//mod on energy, ignores energyMax
-	float restRate;						//speed of energy return
+	float staminaMax;					//max stamina, equal to health initially, goes down by 1 for every point stamina goes below 0 or less, goes up 1 per hour of sleep or four hours of rest
+	float stamina;						//energy a character can expend at a given time, maximum equal to health, minimum equal to resolve
+	float staminaMod;					//mod on stamina, ignores staminaMax
+	float restRate;						//speed of stamina return as points per minute
 	float restRateMod;					//mod on rest rate
+
+	float energy;						//energy, the amount of energy a character has lying between 0% and 100%, limited by character's max health only (think injuries)
+										//energy is lost as time passes, when doing activity, when casting spells, and so on
+										//energy is regained by eating food in nearly all cases
+										//if energy reaches 0, the character dies
+	float energyMod;					//mod on energy, ignores energyMax
 
 	int dodge;							//base dodge capability
 	int dodgeMod;						//mod on dodge capability
