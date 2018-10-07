@@ -191,9 +191,9 @@ private:
 
 	int equipLoadMax;					//weight that can be carried without being unable to move
 	int equipLoadMaxMod;				//mod on carryable weight
-	float equipLoad;					//weight that can be carried without any penalty (note: backpacks will inflict move penalty either way)
+	float equipLoad;					//weight that can be carried without any penalty (note: weight distribution is another matter to add)
 
-	int speed;							//base speed
+	int speed;							//base speed, probably needs to be renamed
 	int speedMod;						//mod on speed
 
 	int healthMax;						//max health
@@ -210,11 +210,16 @@ private:
 	float restRate;						//speed of stamina return as points per minute
 	float restRateMod;					//mod on rest rate
 
-	float energy;						//energy, the amount of energy a character has lying between 0% and 100%, limited by character's max health only (think injuries)
-										//energy is lost as time passes, when doing activity, when casting spells, and so on
-										//energy is regained by eating food in nearly all cases
-										//if energy reaches 0, the character dies
-	float energyMod;					//mod on energy, ignores energyMax
+	//energy info:	https://www.verywellfit.com/what-is-energy-expenditure-3496103
+	//				https://www.quora.com/How-many-calories-are-there-in-the-average-human-body
+	//				http://www.biologyreference.com/Ma-Mo/Metabolism-Human.html
+	//				https://www.calculator.net/calorie-calculator.html
+	//energy goes down by energyBasis * metabolism every day
+	//energy also goes down with activity. walking, running, fighting, spellcasting, these all reduce energy further
+	//energy can only go up with consumption of food or drinking alcohol
+	float energy;						//energy, the number of kilocalories in a character's body. if it hits 0 (for now), the character is dead
+	float energyBasis;					//the amount of energy spent on a sedentary day, affected by height and weight. look up Basal Metabolic Rate
+	float metabolism;					//multiplier on all energy consumption, high is usually bad
 
 	int dodge;							//base dodge capability
 	int dodgeMod;						//mod on dodge capability
@@ -331,6 +336,8 @@ private:
 	//SKILLS INCREASE FASTER WITH ACTUAL USE OF THEM, BUT THIS CAN OFTEN COME AT GREAT RISK
 	//COMBAT INCREASES COMBAT SKILLS FASTER THAN TRAINING, BUT IS OF COURSE VERY DANGEROUS
 	//COMBAT EXPERIENCE IS NOT GAINED IF A BATTLE IS EASILY WON, THERE MUST BE A SIGNIFICANT CHANCE OF FAILURE AND A SMALL CHANCE OF DEATH
+
+	//TO LEARN PASSIVE COMBAT SKILLS, YOU SELECT WHICH SKILL(S) YOU WANT AND BEGIN TRAINING THEM
 
 	//dev variables
 

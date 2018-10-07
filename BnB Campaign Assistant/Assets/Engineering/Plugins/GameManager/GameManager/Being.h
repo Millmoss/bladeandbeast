@@ -14,10 +14,10 @@ class Being
 	protected:
 		std::string name;					//name
 		std::string type;					//being type
-		int travelMove;						//usual speed in miles per eight hours of walking or a normal day of travel
-		int walkMove;						//speed when walking
-		int combatMove;						//speed in combat
-		int runMove;						//speed while sprinting
+		int travelMove;						//usual movespeed in miles per eight hours of walking or a normal day of travel
+		int walkMove;						//movespeed when walking
+		int combatMove;						//movespeed in combat
+		int runMove;						//movespeed while sprinting
 		float jumpHeight;					//height of jump from standing under standard conditions
 		int hands;							//number of hands that are functionally human
 		std::string *hand;					//hand identifier (human would have 0 be "Left" and 1 be "Right"
