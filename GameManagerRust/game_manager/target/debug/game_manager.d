@@ -1,0 +1,1 @@
+C:\Users\Administrator\Desktop\bladeandbeast\GameManagerRust\game_manager\target\debug\game_manager.pdb: C:\Users\Administrator\Desktop\bladeandbeast\GameManagerRust\game_manager\src\main.rs C:\Users\Administrator\Desktop\bladeandbeast\GameManagerRust\game_manager\src\primary_package.rs
