@@ -156,9 +156,9 @@ pub mod primary_package
         }
     }
 
-    pub struct Object
+    pub struct Thing
     {
-        pub name: String,
+        pub id: String,
         pub weight: f64,
         pub height: f64,
         pub width: f64,
@@ -167,9 +167,16 @@ pub mod primary_package
         pub temperature: f64
     }
 
-    impl Weight for Object {}
-    impl Distance for Object {}
-    impl Temperature for Object {}
-    impl Volume for Object {}
-    impl Time for Object {}
+    /*impl Thing
+    {
+        pub fn new(x: i32, y: i32) -> Point {
+            Point { x: x, y: y }
+        }
+    }*/
+
+    impl Weight for Thing {}
+    impl Distance for Thing {}
+    impl Temperature for Thing {}
+    impl Volume for Thing {}
+    impl Time for Thing {}
 }
